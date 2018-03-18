@@ -1,3 +1,5 @@
+;四个用户程序结构上都是一致的,所以就不再重复写了
+;在文件ball_left_up.asm中有非常详细的注释
 xup equ 26
 xdwon equ 48
 xleft equ 82
