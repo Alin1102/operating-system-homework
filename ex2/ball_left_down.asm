@@ -1,18 +1,18 @@
 xup equ 26
 xdwon equ 48
-xleft equ 82
-xright equ 158
+xleft equ 0
+xright equ 80
 row equ 80
-org 0d100h
+org 0b100h
 section .code
 main:
 mov ax,0xb800   
 mov es,ax       ;es指向显存
 mov di,0        ;初始化di
-mov dh,30        ;记录x   
-mov dl,80        ;记录y
-mov bh,2
-mov bl,2
+mov byte dh,[x]        ;记录x   
+mov byte dl,[y]        ;记录y
+mov byte bh,[movx]
+mov byte bl,[movy]
 shoot:
 call setstyle
 call delay      ;延时
@@ -59,7 +59,7 @@ mov cl,[color]
 inc cl
 cmp cl,15
 jng $+4
-mov cl,7
+mov cl,9
 mov [color],cl
 ret
 delay:
@@ -70,12 +70,16 @@ mov cx,0x01
 mov dx,0x6480     
 int 15h
 mov dh,[x]
-mov dl,[y] 
+mov dl,[y]
+mov [movx],bh
+mov [movy],bl 
 ret
 datadef:
-x dd 0
+x dd 34
 y dd 0
+movx dd 2
+movy dd 2
 dischar db 'A'
-color db 7
+color db 9
 times 510-($-$$) db 0
 dd 0xaa55

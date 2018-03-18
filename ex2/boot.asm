@@ -5,15 +5,14 @@ Right_up_prg equ 0xC100
 Right_down_prg equ 0xD100
 section .code
 boot:
-	mov ah,13h
-	mov al,1
-	mov bl,0ah
-	mov bh,0
-	mov dh,0ah
+    mov ax,cs
+    mov ds,ax
+    mov bp,msg
+    mov dh,0ah
 	mov dl,23h
-	mov bp,msg
-	mov cx,20
-	int 10h
+    mov cx,23
+    mov bl,0ah
+    call display
     call delay
     call clear
     mov bx, Left_up_prg ;偏移地址; 存放数据的内存偏移地址
@@ -28,7 +27,6 @@ boot:
     mov bx, Right_down_prg ;偏移地址; 存放数据的内存偏移地址
     mov cl,5
     call runuserpro
-    call setupres
     jmp listen_keyboard
 runuserpro:
     mov ax,cs                ;段地址 ; 存放数据的内存基地址
@@ -41,18 +39,31 @@ runuserpro:
     int 13H
     ret
 listen_keyboard:
+    mov ax,0
+    mov es,ax
+    mov bl,0b01110000
+    mov bp,guide
+    mov dh,0
+	mov dl,0
+	mov cx,80
+    call display
     mov ah,0
     int 0x16
-    cmp al,65
+    cmp al,73
+    je showname
+    cmp al,32
+    jne $+5
+    call clear
+    cmp al,49
     jne $+5
     call Left_up_prg
-    cmp al,66
-    jne $+5
-    call Left_down_prg
-    cmp al,67
+    cmp al,50
     jne $+5
     call Right_up_prg
-    cmp al,68
+    cmp al,51
+    jne $+5
+    call Left_down_prg
+    cmp al,52
     jne $+5
     call Right_down_prg
     jmp listen_keyboard
@@ -72,20 +83,23 @@ delay:
     mov dx,0x8480     
     int 15h
     ret
-setupres:
-    mov bp,setup
+display:
     mov ah,13h
 	mov al,1
-	mov bl,0ah
 	mov bh,0
-	mov dh,0
-	mov dl,0
-	mov cx,21
 	int 10h
-    call delay
     ret
+showname:
+    mov bp,myname
+    mov dh,0ah
+	mov dl,24
+    mov cx,33
+    mov bl,0ah
+    call display
+    jmp listen_keyboard
 bootdata:
-msg db "Boot Program Running"
-setup db "User Program starting"
+msg db "Boot Program Loading..."
+guide db "     I ABOUT || 1-4 DISPLAY_CHOICE || ESC BACK_TO_HERE || SPACE CLEAR_SCREEN    "
+myname db "16337259 Designed by XieJiangzhao"
 times 510-($-$$) db 0
 dd 0xaa55
