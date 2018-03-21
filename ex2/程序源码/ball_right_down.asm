@@ -1,19 +1,24 @@
-org 07c00h
+;四个用户程序结构上都是一致的,所以就不再重复写了
+;在文件ball_left_up.asm中有非常详细的注释
+xup equ 26
+xdwon equ 48
+xleft equ 82
+xright equ 158
+row equ 80
+org 0d100h
 section .code
 main:
 mov ax,0xb800   
 mov es,ax       ;es指向显存
 mov di,0        ;初始化di
-mov dh,0        ;记录x   
-mov dl,0        ;记录y
-mov bh,2
-mov bl,2
-mov byte [es:di],'A'    
-mov byte [es:di+1],7
+mov byte dh,[x]        ;记录x   
+mov byte dl,[y]        ;记录y
+mov byte bh,[movx]
+mov byte bl,[movy]
 shoot:
 call setstyle
 call delay      ;延时
-mov ax,80       ;边界
+mov ax,row       ;边界
 mul dh          ;计算偏移
 mov cl,dl
 add ax,cx
@@ -25,18 +30,23 @@ mov byte [es:di+1],cl
 call setoffset
 add dh,bh
 add dl,bl
+mov ah,1
+int 0x16
+cmp al,27
+jne $+3
+ret
 jmp shoot
 setoffset:
-cmp dh,0
+cmp dh,xup
 jne $+4
 mov bh,2
-cmp dh,48
+cmp dh,xdwon
 jne $+4
 mov bh,-2
-cmp dl,0
+cmp dl,xleft
 jne $+4
 mov bl,2
-cmp dl,158
+cmp dl,xright
 jne $+4
 mov bl,-2
 ret
@@ -51,7 +61,7 @@ mov cl,[color]
 inc cl
 cmp cl,15
 jng $+4
-mov cl,7
+mov cl,9
 mov [color],cl
 ret
 delay:
@@ -62,12 +72,16 @@ mov cx,0x01
 mov dx,0x6480     
 int 15h
 mov dh,[x]
-mov dl,[y] 
+mov dl,[y]
+mov [movx],bh
+mov [movy],bl 
 ret
 datadef:
-x dd 0
-y dd 0
+x dd 34
+y dd 82
+movx dd 2
+movy dd 2
 dischar db 'A'
-color db 7
+color db 9
 times 510-($-$$) db 0
 dd 0xaa55
