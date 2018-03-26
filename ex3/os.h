@@ -1,4 +1,3 @@
-void ClearScreen();
-void PrintMsg(char *str,int x,int y,int size,int style);
-void Shutdown();
-char Listen_Keyboard();
+void Terminal();
+void Task();
+int strcmp(char* src,char* obj,int len);
