@@ -1,4 +1,4 @@
-void clearscreen();
-void printmsg(char *str,int x,int y,int size,int style);
-void shutdown();
-int listen_keyboard();
+void ClearScreen();
+void PrintMsg(char *str,int x,int y,int size,int style);
+void Shutdown();
+char Listen_Keyboard();

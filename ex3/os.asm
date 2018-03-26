@@ -1,19 +1,19 @@
 [BITS 16]
-global _clearscreen,_printmsg,_shutdown,_listen_keyboard
+global _ClearScreen,_PrintMsg,_Shutdown,_Listen_Keyboard
 section .text
-_clearscreen:
-    mov ah,0x06
-    mov al,0                ;清窗口
-    mov ch,0                ;左上角的行号
-    mov cl,0                ;左上角的列号
-    mov dh,24               ;右下角的行号
-    mov dl,79               ;右下角的行号(决定清屏的区域)
-    mov bh,0x0              ;清屏后勇一片黑来填充
+_ClearScreen:
+    mov ax,cs
+    mov ss,ax
+	mov dx,sp
+    mov sp,0x7c00  ;set stack and sp
+    mov ah,0x00
+    mov al,0x03
     int 0x10
-    pop ecx
-    jmp cx
+	mov sp,dx
+	pop eax
+	jmp cx
 
-_printmsg:
+_PrintMsg:
 	mov ax, cs
 	mov ds, ax
 	mov es, ax
@@ -26,10 +26,16 @@ _printmsg:
     mov bh,0
     mov ah,13h
     int 10h
+	mov ah,9h
+	mov al,0
+	mov bh,0
+	mov bl,15
+	mov cx,1
+	int 10h
 	pop ecx
 	jmp cx
 
-_shutdown:
+_Shutdown:
     mov ax, 5301h ;function 5301h
 	xor bx, bx ;device id: 0000h (=system bios)
 	int 15h ;call interrupt: 15h
@@ -47,8 +53,9 @@ _shutdown:
 	pop ecx
 	jmp cx
 
-_listen_keyboard:
+_Listen_Keyboard:
     mov ah,0
     int 0x16
+	mov ah,0
     pop ecx
     jmp cx
