@@ -6,7 +6,6 @@ global _ClearScreen
 global _Listen_Keyboard
 global _Shutdown
 global _Load
-
 [section .text]
 _printSentence:
 	push ebp
@@ -78,10 +77,10 @@ _Load:
 	mov ax, cs
 	mov ds, ax
 	mov es, ax
-	mov bx, [ebp+08h]         ;设置用户程序的加载的内存地址
-    mov cl, [ebp+0ch]  
+	mov bx, word [esp+08h]         ;设置用户程序的加载的内存地址
+    mov cl, byte [esp+0ch] 
     mov ah,2                 ;功能号
-    mov al, [ebp+10h]                 ;扇区数
+    mov al, byte [esp+10h]               ;扇区数
     mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
     mov dh,0                 ;磁头号 ; 起始编号为0
     mov ch,0                 ;柱面号 ; 起始编号为0
@@ -89,3 +88,8 @@ _Load:
 	pop ebp
 	pop ecx
 	jmp cx
+
+_RunProg:
+	call 0xa100
+	pop ecx
+	jmp cx	

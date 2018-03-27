@@ -9,7 +9,8 @@ char* lscommand="ls Command!";
 char* ls_key="ls";
 char* shutdown_key="shutdown";
 char* clear_key="clear";
-char* run_key="./"
+char* run_key="./";
+char* ls_head="Name      Size      Locate    ";
 extern int Terminalrow;
 extern int Terminalcol;
 int len(char* str){
@@ -41,11 +42,28 @@ void Task(char* userinput){
         Shutdown();
     }
     else if(strcmp(userinput,ls_key,len(ls_key))){
-        printSentence(lscommand,Terminalrow,1,len(lscommand),15);
+        printSentence(ls_head,Terminalrow,1,len(ls_head),15);
+        void* p=(void*)0xb100;
+        Load(p,22,1);
+        Showtable();
         Terminalrow++;
+    }
+    else if(strcmp(userinput,run_key,len(run_key))){
+        Listen_Keyboard();
     }
     else{
         printSentence(unsupport,Terminalrow,1,len(unsupport),15);
         Terminalrow++;
     }
+}
+void Showtable(){
+        char* Table=(char*)0xb100;
+        for(int i = 0;i<3;i++){
+            if(len(Table)==0) break;
+            Terminalrow++;
+            for(int j = 1;j<22;j+=10){
+                printSentence(Table,Terminalrow,j,len(Table),15);
+                Table+=len(Table)+1;
+            }
+        }
 }

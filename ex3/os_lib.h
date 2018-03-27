@@ -5,3 +5,4 @@ char Listen_Keyboard();
 void Task(char* userinput);
 void Shutdown();
 void Load(void* addr,int beg,int num);
+void Showtable();

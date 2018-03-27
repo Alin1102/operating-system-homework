@@ -1,0 +1,12 @@
+db "A.COM"
+db 0
+db "512KB"
+db 0
+db "0XA100"
+db 0
+db "B.COM"
+db 0
+db "1024KB"
+db 0
+db "0XB100"
+db 0
