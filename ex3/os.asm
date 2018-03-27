@@ -6,6 +6,7 @@ global _ClearScreen
 global _Listen_Keyboard
 global _Shutdown
 global _Load
+global _RunProg
 [section .text]
 _printSentence:
 	push ebp
@@ -90,6 +91,7 @@ _Load:
 	jmp cx
 
 _RunProg:
-	call 0xa100
+	mov bx,word [esp+04h]
+	call bx
 	pop ecx
 	jmp cx	

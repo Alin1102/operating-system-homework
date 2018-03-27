@@ -4,6 +4,10 @@ __asm__("mov %ax, %ds\n");
 __asm__("mov %ax, %es\n");
 __asm__("jmpl $0, $__main\n");
 #include "os_lib.h"
+
+
+
+
 char* unsupport="Command not found";
 char* lscommand="ls Command!";
 char* ls_key="ls";
@@ -13,6 +17,10 @@ char* run_key="./";
 char* ls_head="Name      Size      Locate    ";
 extern int Terminalrow;
 extern int Terminalcol;
+
+
+
+
 int len(char* str){
     int len=0;
     while(str[len]!='\0'){
@@ -26,7 +34,8 @@ int strcmp(char* src,char* obj,int len){
             return 0;
         }
     }
-    if(src[len]==0)
+    if(src[0]=='.'&&src[1]=='/') return 1;
+    if(src[len]==obj[len])
         return 1;
     else
         return 0;
@@ -43,13 +52,14 @@ void Task(char* userinput){
     }
     else if(strcmp(userinput,ls_key,len(ls_key))){
         printSentence(ls_head,Terminalrow,1,len(ls_head),15);
-        void* p=(void*)0xb100;
-        Load(p,22,1);
         Showtable();
         Terminalrow++;
     }
     else if(strcmp(userinput,run_key,len(run_key))){
-        Listen_Keyboard();
+        void* p=(void*)0xc100;
+        int sector=run_resolve(&userinput[2]);
+        Load(p,sector,1);
+        RunProg(p);
     }
     else{
         printSentence(unsupport,Terminalrow,1,len(unsupport),15);
@@ -66,4 +76,20 @@ void Showtable(){
                 Table+=len(Table)+1;
             }
         }
+}
+int run_resolve(char* src){
+    char* Table=(char*)0xb100;
+    for(int i = 0;i<3;i++){
+            if(len(Table)==0) return -1;
+            if(strcmp(src,Table,len(Table))){
+                Table+=len(Table)+1;
+                Table+=len(Table)+1;
+                int* sector=(int*)Table;
+                return sector[0];
+            }
+            for(int j = 0;j < 3;j += 1){
+                Table+=len(Table)+1;
+            }
+        }
+    Listen_Keyboard();
 }

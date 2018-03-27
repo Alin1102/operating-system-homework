@@ -6,3 +6,5 @@ void Task(char* userinput);
 void Shutdown();
 void Load(void* addr,int beg,int num);
 void Showtable();
+void RunProg(void* addr);
+int run_resolve(char* src);

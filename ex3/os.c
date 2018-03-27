@@ -26,6 +26,8 @@ int _main(){
     return 0;
 }
 void Terminal(){
+    void* p=(void*)0xb100;
+    Load(p,22,1);
     while(1){
         printSentence(TerminalSign,Terminalrow,0,1,10);
         inputchar=0;
