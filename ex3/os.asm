@@ -3,13 +3,6 @@
 
 global _printSentence
 global _ClearScreen
-global _getInput
-global _shutdown
-global _dispatch
-global _reboot
-global _getManual
-global _getDate
-global _roll
 global _Listen_Keyboard
 
 [section .text]
