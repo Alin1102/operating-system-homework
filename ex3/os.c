@@ -4,9 +4,6 @@ __asm__("mov %ax, %ds\n");
 __asm__("mov %ax, %es\n");
 __asm__("jmpl $0, $__main\n");
 #include "os_lib.h"
-void printSentence(char* str,int a,int b,int len,int style);
-void ClearScreen(int x_top,int y_top,int x_down,int y_down);
-char Listen_Keyboard();
 char* Guide="                                      X OS                                      "
             "================================================================================"
             "         X OS is a Free Open-Source Operating System runing in real mode        "
@@ -18,11 +15,8 @@ char userinput[32];
 char inputchar;
 int Terminalrow=0;
 int Terminalcol=0;
-char* unsupport="Command not found";
-char* lscommand="ls Command!";
-char* ls="ls";
 void Terminal();
-void Task();
+void Wait_Task();
 int _main(){
     ClearScreen(0,0,24,79);
     printSentence(Guide,0,0,480,10);
@@ -36,28 +30,25 @@ void Terminal(){
         printSentence(TerminalSign,Terminalrow,0,1,10);
         inputchar=0;
         Terminalcol=0;
-        Task();
-        Terminalrow++;
-        if(strcmp(userinput,ls,2)){
-            printSentence(lscommand,Terminalrow,1,11,15);    
+        for(int i = 0;i<32;i++){
+            userinput[i]=0;
         }
-        else
-            printSentence(unsupport,Terminalrow,1,17,15);
-        Terminalrow++;
+        Wait_Task();
+        Task(userinput);
     }
 }
-void Task(){
+void Wait_Task(){
     while(1){
         inputchar=Listen_Keyboard();
+        if(inputchar==13) break;
         if(inputchar==8&&Terminalcol>0){
-            userinput[Terminalcol]=0;
             Terminalcol--;
+            userinput[Terminalcol]=0;
         }
         else if (inputchar!=8){
             userinput[Terminalcol]=inputchar;
             Terminalcol++;
         }
-        if(inputchar==13) break;
         ClearScreen(Terminalrow,Terminalcol+1,Terminalrow,79);
         printSentence(userinput,Terminalrow,1,Terminalcol,15);      
     }
