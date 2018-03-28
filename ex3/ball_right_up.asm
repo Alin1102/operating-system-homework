@@ -30,7 +30,12 @@ mov byte [es:di+1],cl
 call setoffset
 add dh,bh
 add dl,bl
+listenkeyboard:
 mov ah,1
+int 0x16
+jne $+5
+jmp shoot
+mov ah,0
 int 0x16
 cmp al,27
 jne $+3

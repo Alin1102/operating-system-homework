@@ -63,7 +63,6 @@ void Task(char* userinput){
         if(sector>0){
         Load(p,sector,1);
         RunProg(p);
-        Listen_Keyboard();
         ClearScreen(0,0,24,79);
         Terminalrow=0;
         Terminalcol=0;

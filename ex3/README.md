@@ -46,3 +46,11 @@ __asm__("jmpl $0, $__main\n");
 
 ## 键盘扫描仅仅是扫描
 调用BIOS16H中断时,对于功能号0,等待键盘的一个输入,取得后就放进AL,这个时候键盘缓冲区就没有东西了.但是如果是功能号1,扫描键盘缓冲区,键盘缓冲区的字符被扫描后却不会被清空,如果这个时候再调用一次功能号0然后执行中断,那么这个字符还是会被视作一次键盘输入.
+>Function 01H -- Check keyboard buffer
+Input:		AH=01H
+Returns:	ZF= 1 if the keyboard buffer is empty
+		ZF= 0 if there is at least one character available.
+		In this case, the ASCII and scan codes are placed 
+		in the AL and AH registers as in function 00. The 
+		codes, however, are not removed from the buffer.
+

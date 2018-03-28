@@ -28,10 +28,15 @@ mov byte [es:di+1],cl       ;显示字符
 call setoffset              ;检查是否需要改变运动方向,如果需要则改变
 add dh,bh                   
 add dl,bl                   ;当前位置加上偏移得出下一个位置
+listenkeyboard:
 mov ah,1
-int 0x16                    ;扫描输入缓冲区是否有字符
-cmp al,27                   ;如果是Esc则返回监控程序
-jne $+3             
+int 0x16
+jne $+5
+jmp shoot
+mov ah,0
+int 0x16
+cmp al,27
+jne $+3
 ret
 jmp shoot
 setoffset:
