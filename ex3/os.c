@@ -11,17 +11,18 @@ char* Guide="                                      X OS                         
             "                         Press any key to enter terminal                        "
             "                                                                                ";
 char* TerminalSign="$";
-char userinput[32];
+char userinput[80];
 char inputchar;
 int Terminalrow=0;
 int Terminalcol=0;
 void Terminal();
 void Wait_Task();
 int _main(){
-    ClearScreen(0,0,24,79);
-    printSentence(Guide,0,0,480,10);
+    initial(0,0);
+    ClearScreen(0,0,24,79,0);
+    print(Guide,0,0,480,10);
     Listen_Keyboard();
-    ClearScreen(0,0,24,79);
+    ClearScreen(0,0,24,79,0);
     Terminal();
     return 0;
 }
@@ -29,7 +30,7 @@ void Terminal(){
     void* p=(void*)0xa600;
     Load(p,22,1);
     while(1){
-        printSentence(TerminalSign,Terminalrow,0,1,10);
+        print(TerminalSign,Terminalrow,0,1,10);
         inputchar=0;
         Terminalcol=0;
         for(int i = 0;i<32;i++){
@@ -51,7 +52,7 @@ void Wait_Task(){
             userinput[Terminalcol]=inputchar;
             Terminalcol++;
         }
-        ClearScreen(Terminalrow,Terminalcol+1,Terminalrow,79);
-        printSentence(userinput,Terminalrow,1,Terminalcol,15);      
+        ClearScreen(Terminalrow,Terminalcol+1,Terminalrow,79,0);
+        print(userinput,Terminalrow,1,Terminalcol,15);      
     }
 }

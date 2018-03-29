@@ -1,14 +1,16 @@
 [BITS 16]
 [BITS 16]
 
-global _printSentence
+global _WriteStr
 global _ClearScreen
 global _Listen_Keyboard
 global _Shutdown
 global _Load
 global _RunProg
+global _Reboot
+global _Write
 [section .text]
-_printSentence:
+_WriteStr:
 	push ebp
 	mov ax, cs
 	mov ds, ax
@@ -24,12 +26,6 @@ _printSentence:
     pop es
     mov ah,13h
     int 10h
-	mov ah,9h
-	mov al,0
-	mov bh,0
-	mov bl,15
-	mov cx,1
-	int 10h
     pop ebp
 	pop ecx
 	jmp cx
@@ -37,7 +33,7 @@ _printSentence:
 _ClearScreen:
 	push ebp
 	mov ah, 06h
-	mov al, 0
+	mov al, byte [esp+18h]
 	mov bh, 0fh
 	mov dl, byte [esp+14h]
 	mov dh, byte [esp+10h]
@@ -73,6 +69,9 @@ _Shutdown:
 	pop ecx
 	jmp cx
 
+_Reboot:
+	int 19h
+
 _Load:
 	push ebp
 	mov ax, cs
@@ -90,6 +89,22 @@ _Load:
 	pop ecx
 	jmp cx
 
+_Write:
+	push ebp
+	mov ax, cs
+	mov ds, ax
+	mov es, ax
+	mov bx, word [esp+08h]         ;设置用户程序的加载的内存地址
+    mov cl, byte [esp+0ch] 
+    mov ah,3                 ;功能号
+    mov al, byte [esp+10h]               ;扇区数
+    mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
+    mov dh,0                 ;磁头号 ; 起始编号为0
+    mov ch,0                 ;柱面号 ; 起始编号为0
+    int 13H
+	pop ebp
+	pop ecx
+	jmp cx	
 _RunProg:
 	mov bx,word [esp+04h]
 	call bx
