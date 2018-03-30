@@ -17,9 +17,9 @@ _WriteStr:
 	mov es, ax
 	mov bl, byte [esp+18h]
  	mov cx, word [esp+14h]
- 	mov dl, byte [esp+10h]; 列
- 	mov dh, byte [esp+0ch]; 行
- 	mov bp, word [esp+08h]
+ 	mov dl, byte [esp+10h]
+ 	mov dh, byte [esp+0ch]
+ 	mov bp, word [esp+08h]	;C从右向左压入参数
 	mov al,1
     mov bh,0          
     push cs
@@ -27,8 +27,8 @@ _WriteStr:
     mov ah,13h
     int 10h
     pop ebp
-	pop ecx
-	jmp cx
+	pop ecx			;取出跳转的地址CS:IP
+	jmp cx			;跳转回到C部分继续执行
 	
 _ClearScreen:
 	push ebp
@@ -79,8 +79,8 @@ _Load:
 	mov es, ax
 	mov bx, word [esp+08h]         ;设置用户程序的加载的内存地址
     mov cl, byte [esp+0ch] 
-    mov ah,2                 ;功能号
-    mov al, byte [esp+10h]               ;扇区数
+    mov ah,2                 	   ;功能号(读)
+    mov al, byte [esp+10h]         ;扇区数
     mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
     mov dh,0                 ;磁头号 ; 起始编号为0
     mov ch,0                 ;柱面号 ; 起始编号为0
@@ -96,8 +96,8 @@ _Write:
 	mov es, ax
 	mov bx, word [esp+08h]         ;设置用户程序的加载的内存地址
     mov cl, byte [esp+0ch] 
-    mov ah,3                 ;功能号
-    mov al, byte [esp+10h]               ;扇区数
+    mov ah,3                 	   ;功能号(写)
+    mov al, byte [esp+10h]         ;扇区数
     mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
     mov dh,0                 ;磁头号 ; 起始编号为0
     mov ch,0                 ;柱面号 ; 起始编号为0
@@ -107,6 +107,6 @@ _Write:
 	jmp cx	
 _RunProg:
 	mov bx,word [esp+04h]
-	call bx
+	call bx					;跳转到用户程序
 	pop ecx
 	jmp cx	

@@ -1,3 +1,7 @@
+/*
+    os_lib.c实现了很多细致的函数
+    Author:Xiejiangzhao
+*/
 __asm__(".code16gcc\n");
 __asm__("mov $0, %eax\n");
 __asm__("mov %ax, %ds\n");
@@ -5,53 +9,28 @@ __asm__("mov %ax, %es\n");
 __asm__("jmpl $0, $__main\n");
 #include "os_lib.h"
 #include "os_lib_val.h"
-#define Load_addr 0xc000
-#define Table_addr 0xa600
 
-extern int Terminalrow;
+extern int Terminalrow;      //声明这两个变量是os.c中的
 extern int Terminalcol;
 
 
-void initial(int row,int col){
-    Terminalrow=row;
-    Terminalcol=col;
-}
-int len(char* str){
-    int len=0;
-    while(str[len]!='\0'){
-        len++;
-    }
-    return len;
-}
-int strcmp(char* src,char* obj,int len){
-    for(int i = 0; i<len;i++){
-        if(src[i]!=obj[i]){
-            return 0;
-        }
-    }
-    if(src[0]=='.'&&src[1]=='/') return 1;
-    if(src[len]==obj[len])
-        return 1;
-    else
-        return 0;
-}
 void Task(char* userinput){
-    Terminalrow++;
-    if(strcmp(userinput,clear_key,len(clear_key))){
-        ClearScreen(0,0,24,79,0);
+    Terminalrow++;          //回车后光标要移到下一行
+    if(strcmp(userinput,clear_key,len(clear_key))){     //清屏命令
+        ClearScreen(0,0,24,79,0);         
         initial(0,0);
     }
-    else if(strcmp(userinput,shutdown_key,len(shutdown_key))){
+    else if(strcmp(userinput,shutdown_key,len(shutdown_key))){      //关机命令
         Shutdown();
     }
-    else if(strcmp(userinput,reboot_key,len(reboot_key))){
+    else if(strcmp(userinput,reboot_key,len(reboot_key))){          //重启命令
         Reboot();
     }
-    else if(strcmp(userinput,help_key,len(help_key))){
+    else if(strcmp(userinput,help_key,len(help_key))){              //帮助命令
         print(help_info,Terminalrow,1,len(help_info),15);
-        Terminalrow+=len(help_info)/80;
+        Terminalrow+=len(help_info)/80;             
     }
-    else if(strcmp(userinput,uname_key,len(uname_key))){
+    else if(strcmp(userinput,uname_key,len(uname_key))){            //个人信息命令
         ClearScreen(0,0,24,79,0);
         Terminalrow=0;
         Terminalcol=0;
@@ -59,65 +38,117 @@ void Task(char* userinput){
         Listen_Keyboard();
         ClearScreen(0,0,24,79,0);
     }
-    else if(strcmp(userinput,ls_key,len(ls_key))){
-        print(ls_head,Terminalrow,1,len(ls_head),15);
-        Showtable();
+    else if(strcmp(userinput,ls_key,len(ls_key))){                  //打印文件存储表命令
+        print(ls_head,Terminalrow,1,len(ls_head),15);               //打印文件存储表数据项
+        Showtable();                                                //打印数据
         Terminalrow++;
     }
-    else if(strcmp(userinput,run_key,len(run_key))){
-        void* p=(void*)Load_addr;
-        int sector=run_resolve(&userinput[2]);
-        if(sector>0){
-        Load(p,sector,1);
-        ClearScreen(0,0,24,79,0);
-        RunProg(p);
-        ClearScreen(0,0,24,79,0);
-        initial(0,0);
+    else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令
+        void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
+        int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
+        if(sector>0){                                               //成功找到程序名对应的扇区
+        Load(p,sector,1);                                           //加载扇区数据到内存
+        ClearScreen(0,0,24,79,0);                                   //清屏
+        RunProg(p);                                                 //运行用户程序
+        ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
+        initial(0,0);                                               //初始化光标
         }
-        else{
-        print(not_found,Terminalrow,1,len(not_found),15);
+        else{                                                       //找不到程序信息
+        print(not_found,Terminalrow,1,len(not_found),15);           //打印错误信息
         Terminalrow++;
         }
     }
-    else{
-        print(unsupport,Terminalrow,1,len(unsupport),15);
+    else{                                                           //命令没有办法识别
+        print(unsupport,Terminalrow,1,len(unsupport),15);           //打印错误信息
         Terminalrow++;
     }
 }
 void Showtable(){
-        char* Table=(char*)Table_addr;
-        for(int i = 0;i<32;i++){
-            if(len(Table)==0) break;
+        struct Proginfo* Table=(struct Proginfo*)Table_addr;        //初始化一个指针指向内存中存放文件存储表的地址
+        for(int i = 0;i<Table->count;i++){                          //循环打印信息
             Terminalrow++;
-            for(int j = 1;j<22;j+=10){
-                print(Table,Terminalrow,j,len(Table),15);
-                Table+=len(Table)+1;
-            }
-            Table+=len(Table)+1;
+            print(Table->name[i],Terminalrow,1,len(Table->name[i]),15); //打印程序名
+            print(IntconvStr(Table->size[i]),Terminalrow,11,10,15);     //打印程序大小
+            print(IntconvStr(Table->sector[i]),Terminalrow,21,10,15);   //打印程序所在扇区
         }
 }
 int run_resolve(char* src){
-    char* Table=(char*)Table_addr;
-    for(int i = 0;i<32;i++){
-            if(len(Table)==0) return -1;
-            if(strcmp(src,Table,len(Table))){
-                Table+=len(Table)+1;
-                Table+=len(Table)+1;
-                Table+=len(Table)+1;
-                int* sector=(int*)Table;
-                return sector[0];
-            }
-            for(int j = 0;j < 4;j += 1){
-                Table+=len(Table)+1;
+    struct Proginfo* Table=(struct Proginfo*)Table_addr;            //同样初始化指针
+    for(int i = 0;i<Table->count;i++){
+            if(strcmp(Table->name[i],src,len(Table->name[i]))){     //比较程序名是否相同
+                return Table->sector[i];                            //相同返回该项的扇区
             }
         }
-    return -1;
+    return -1;                                                      //否则返回-1
 }
 void print(char* str,int row,int col,int len,int style){
-    while(row + len/80 > 23){
-        ClearScreen(0,0,24,79,1);
-        Terminalrow--;
-        row--;
+    while(row + len/80 > 23){           //如果要打印的信息超出了屏幕范围
+        ClearScreen(0,0,24,79,1);       //向上滚动一行
+        Terminalrow--;                  //光标向上滚动
+        row--;                          
     }
-    WriteStr(str,row,col,len,style);
+    WriteStr(str,row,col,len,style);    //滚动完成,输出数据
+}
+void buildtable(){
+    struct Proginfo progtable;          //准备好结构体
+    strcpy(progtable.name[0],"A.COM");
+    progtable.size[0]=512;
+    progtable.sector[0]=23;
+    strcpy(progtable.name[1],"B.COM");
+    progtable.size[1]=512;
+    progtable.sector[1]=24;
+    strcpy(progtable.name[2],"C.COM");
+    progtable.size[2]=512;
+    progtable.sector[2]=25;
+    strcpy(progtable.name[3],"D.COM");
+    progtable.size[3]=512;
+    progtable.sector[3]=26;
+    progtable.count=4;
+    Write(&progtable,22,1);             //往磁盘写入文件存储表
+}
+void strcpy(char *obj,const char *src)   
+{
+    while ((*obj++=*src++)!='\0');
+}
+int StrConvInt(char* str,int len){
+    int ret=0;
+    int i=len-1;
+    while(i>=0)
+    {   
+        ret*=10;
+        ret+=str[i]-'0';
+        i--;
+    }
+    return 23;
+}
+char* IntconvStr(int num){
+    char temp[4];
+    int i=3;
+    while(num>0){
+        sectorstr[i]=num%10+'0';
+        i--;
+        num/=10;
+    }
+    return &sectorstr[i+1];
+}
+void initial(int row,int col){
+    Terminalrow=row;
+    Terminalcol=col;
+}
+
+int len(char* str){
+    int len=0;
+    while(str[len]!='\0'){
+        len++;
+    }
+    return len;
+}
+int strcmp(char* str1,char* str2,int len){
+    if(str2[0]=='.'&&str2[1]=='/') return 1;
+    for(int i = 0; i<=len;i++){
+        if(str1[i]!=str2[i]){
+            return 0;
+        }
+    }
+    return 1;
 }
