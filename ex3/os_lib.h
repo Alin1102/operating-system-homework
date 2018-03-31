@@ -42,3 +42,4 @@ void Reboot();                                                          //重启
 void Load(void* addr,int beg,int num);                                  //从磁盘某个扇区加载数据
 void Write(void* addr,int beg,int num);                                 //往磁盘某个扇区写入数据
 void RunProg(void* addr);                                               //跳转到某个地址执行程序
+void ClearCursor();

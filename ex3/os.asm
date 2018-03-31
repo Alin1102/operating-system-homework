@@ -9,6 +9,7 @@ global _Load
 global _RunProg
 global _Reboot
 global _Write
+global _ClearCursor
 [section .text]
 _WriteStr:
 	push ebp
@@ -108,5 +109,15 @@ _Write:
 _RunProg:
 	mov bx,word [esp+04h]
 	call bx					;跳转到用户程序
+	pop ecx
+	jmp cx
+
+_ClearCursor:
+	mov ah,9h
+	mov al,0
+	mov bh,0
+	mov bl,15
+	mov cx,1
+	int 10h
 	pop ecx
 	jmp cx	

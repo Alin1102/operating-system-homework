@@ -18,6 +18,7 @@ char* Guide="                                      X OS                         
             "                         Press any key to enter terminal                        "
             "                                                                                ";
 char* TerminalSign="$"; //终端标志
+char* nullchar=" ";
 char userinput[80];     //用户输入的命令,用字符串保存起来
 char inputchar;         //用户单次键盘输入的字符
 int Terminalrow=0;      //当前光标位置,从这里进行字符串输出
@@ -50,6 +51,7 @@ void Wait_Task(){
         inputchar=Listen_Keyboard();                //等待用户键盘输入
         if(inputchar==13) break;                    //回车说明输入结束,退出循环
         if(inputchar==8&&Terminalcol>0){            //如果是退格则需要删除该字符
+            print(nullchar,Terminalrow,Terminalcol,1,15);
             Terminalcol--;
             userinput[Terminalcol]=0;
         }
@@ -57,7 +59,9 @@ void Wait_Task(){
             userinput[Terminalcol]=inputchar;
             Terminalcol++;
         }
-        ClearScreen(Terminalrow,Terminalcol+1,Terminalrow,79,0);    //清空光标以后的内容
-        print(userinput,Terminalrow,1,Terminalcol,15);              //打印用户输入的字符串
+        if(Terminalcol>=1)
+            print(&userinput[Terminalcol-1],Terminalrow,Terminalcol,1,15);      //打印用户输入的字符串
+        else
+            print(TerminalSign,Terminalrow,0,1,10);
     }
 }
