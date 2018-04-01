@@ -2,7 +2,7 @@
     os_lib_val.h存放了os_lib.c中的全局变量声明
     Author:Xiejiangzhao
 */
-#define Load_addr 0xc000        //用户程序加载的内存地址LMA
+#define Load_addr 0xc100        //用户程序加载的内存地址LMA
 #define Table_addr 0xa600       //文件存储表加载的内存地址
 char* unsupport="Command not found";    //指令不能识别的输出
 char* ls_key="ls";                                          //相关指令

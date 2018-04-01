@@ -122,7 +122,6 @@ int StrConvInt(char* str,int len){
     return 23;
 }
 char* IntconvStr(int num){
-    char temp[4];
     int i=3;
     while(num>0){
         sectorstr[i]=num%10+'0';
