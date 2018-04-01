@@ -1,4 +1,5 @@
 @echo off
+nasm -f bin boot.asm -o boot.img
 nasm -f elf32 os.asm -o os_asm.o
 nasm -f bin ball_left_up.asm -o ball_left_up.img
 nasm -f bin ball_left_down.asm -o ball_left_down.img

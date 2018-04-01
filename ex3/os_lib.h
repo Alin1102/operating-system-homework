@@ -39,7 +39,7 @@ void ClearScreen(int x_top,int y_top,int x_down,int y_down,int isScroll);   //�
 char Listen_Keyboard();                                                 //等待键盘输入,返回输入字符的ASCII
 void Shutdown();                                                        //关机指令
 void Reboot();                                                          //重启指令
-void Load(void* addr,int beg,int num);                                  //从磁盘某个扇区加载数据
-void Write(void* addr,int beg,int num);                                 //往磁盘某个扇区写入数据
+void Load(void* addr,int head,int sector,int num);                                  //从磁盘某个扇区加载数据
+void Write(void* addr,int head,int sector,int num);                                 //往磁盘某个扇区写入数据
 void RunProg(void* addr);                                               //跳转到某个地址执行程序
 void ClearCursor();

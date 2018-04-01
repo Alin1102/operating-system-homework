@@ -35,7 +35,7 @@ int _main(){
 void Terminal(){
     buildtable();                   //用来临时创建文件存储表的函数   
     void* p=(void*)0xa600;          //操作系统结束,从这里开始放文件存储表
-    Load(p,22,1);                   //加载文件存储表
+    Load(p,1,4,1);                   //加载文件存储表
     while(1){
         Terminalcol=0;
         print(TerminalSign,Terminalrow,0,1,10);     //打印终端符号

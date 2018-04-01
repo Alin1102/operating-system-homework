@@ -47,7 +47,7 @@ void Task(char* userinput){
         void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                               //成功找到程序名对应的扇区
-        Load(p,sector,1);                                           //加载扇区数据到内存
+        Load(p,1,sector-18,1);                                           //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏
         RunProg(p);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
@@ -104,7 +104,7 @@ void buildtable(){
     progtable.size[3]=512;
     progtable.sector[3]=26;
     progtable.count=4;
-    Write(&progtable,22,1);             //往磁盘写入文件存储表
+    Write(&progtable,1,4,1);             //往磁盘写入文件存储表
 }
 void strcpy(char *obj,const char *src)   
 {
