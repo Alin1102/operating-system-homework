@@ -27,6 +27,8 @@ char inputchar;         //用户单次键盘输入的字符
 int Terminalrow=0;      //当前光标位置,从这里进行字符串输出
 int Terminalcol=0;
 int _main(){
+    setTimerInterrupt();
+    test_interrupt();
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
     print(Guide,0,0,480,10);        //打印系统引导界面

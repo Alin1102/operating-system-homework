@@ -51,3 +51,14 @@ OCW2 (EOI e 1, SL e 0, R e 0).
 ![3](https://lh3.googleusercontent.com/-pMTlyzlWGZE/WscAkkBTeTI/AAAAAAAAGlI/9jAVx9JKrUANIdmuc0eHRuusV22MHiTfgCHMYCw/s0/chrome_2018-04-06_13-07-28.png)
 
 20H的由来到此结束
+
+## 段间转移实现
+
+# 项目进度
+
+- [ ] 时钟中断自定义
+- [ ] 键盘响应自定义
+- [ ] 自由中断号调用
+- [ ] 三项新功能
+- [ ] 系统测试
+- [ ] FAT文件系统

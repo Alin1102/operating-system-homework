@@ -1,6 +1,8 @@
 [BITS 16]
 global _Initial_Interrupt
 global _test_interrupt
+global _setTimerInterrupt
+extern _ClearScreen
 _Initial_Interrupt:
 	push ebp
 	mov ebp,esp
@@ -19,6 +21,23 @@ _Initial_Interrupt:
     jmp cx
 
 _test_interrupt:
-    int 21h
+    int 08h
     pop ecx
     jmp cx
+
+_setTimerInterrupt:
+    xor ax,ax
+    mov es,ax   ;置es为0
+    push word [es:0x20]
+    push word [es:0x22]
+    push word [tmp]
+    push word 0
+    pop word [es:0x22]
+    pop word [es:0x20]
+    pop word [tmp+2]
+    pop word [tmp]
+    pop ecx
+    jmp cx
+datadef:
+    tmp dw _ClearScreen
+    

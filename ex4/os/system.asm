@@ -123,4 +123,4 @@ _ClearCursor:
 	mov cx,1
 	int 10h
 	pop ecx
-	jmp cx	
+	jmp cx
