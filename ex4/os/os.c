@@ -11,6 +11,7 @@ __asm__("jmpl $0, $__main\n");
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
+#include "interrupt.h"
 
 //用户引导界面
 char* Guide="                                      X OS                                      "

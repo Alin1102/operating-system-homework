@@ -9,7 +9,7 @@ __asm__("mov %ax, %es\n");
 __asm__("jmpl $0, $__main\n");
 #include "os_lib.h"
 #include "os_lib_val.h"
-
+#include "string.h"
 extern int Terminalrow;      //声明这两个变量是os.c中的
 extern int Terminalcol;
 
@@ -106,10 +106,6 @@ void buildtable(){
     progtable.count=4;
     Write(&progtable,1,4,1);             //往磁盘写入文件存储表
 }
-void strcpy(char *obj,const char *src)   
-{
-    while ((*obj++=*src++)!='\0');
-}
 int StrConvInt(char* str,int len){
     int ret=0;
     int i=len-1;
@@ -133,21 +129,4 @@ char* IntconvStr(int num){
 void initial(int row,int col){
     Terminalrow=row;
     Terminalcol=col;
-}
-
-int len(char* str){
-    int len=0;
-    while(str[len]!='\0'){
-        len++;
-    }
-    return len;
-}
-int strcmp(char* str1,char* str2,int len){
-    if(str2[0]=='.'&&str2[1]=='/') return 1;
-    for(int i = 0; i<=len;i++){
-        if(str1[i]!=str2[i]){
-            return 0;
-        }
-    }
-    return 1;
 }

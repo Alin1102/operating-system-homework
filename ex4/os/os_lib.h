@@ -22,8 +22,6 @@ void Wait_Task();
 void Task(char* userinput);                 //处理命令
 
 //os_lib.c的函数声明
-int strcmp(char* str1,char* str2,int len);  //比较两个字符串是否相同
-void strcpy(char* obj,const char* src);     //复制字符串
 void print(char* str,int row,int col,int len,int style);    //在屏幕上某个位置打印字符串(包装WriteStr支持滚屏)
 void Showtable();                           //打印文件存储表数据
 int run_resolve(char* src);                 //传入用户程序的程序名,返回用户程序在软盘中的扇区,找不到返回-1
@@ -31,7 +29,6 @@ void initial(int row,int col);              //设定光标位置
 void buildtable();                          //用来临时创建文件存储表的函数
 int StrConvInt(char* str,int len);          //将字符串转换为数字
 char* IntconvStr(int num);                  //将数字转换成字符串
-int len(char* str);                         //返回字符串的长度
 
 //os.asm的函数声明
 void WriteStr(char* str,int row,int col,int len,int style);             //在屏幕上某个位置打印字符串
