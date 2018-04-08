@@ -6,8 +6,6 @@ struct Proginfo{
 };
 //文件存储表的结构体声明
 
-
-
 //os.c的函数声明
 void Terminal();                
 void Wait_Task();
@@ -18,16 +16,11 @@ void Showtable();                           //打印文件存储表数据
 int run_resolve(char* src);                 //传入用户程序的程序名,返回用户程序在软盘中的扇区,找不到返回-1
 void initial(int row,int col);              //设定光标位置                   
 void buildtable();                          //用来临时创建文件存储表的函数
-int StrConvInt(char* str,int len);          //将字符串转换为数字
-char* IntconvStr(int num);                  //将数字转换成字符串
 
 //os.asm的函数声明
 void WriteStr(char* str,int row,int col,int len,int style);             //在屏幕上某个位置打印字符串
 void ClearScreen(int x_top,int y_top,int x_down,int y_down,int isScroll);   //往屏幕某个区域清屏,或者执行滚屏
-char Listen_Keyboard();                                                 //等待键盘输入,返回输入字符的ASCII
 void Shutdown();                                                        //关机指令
 void Reboot();                                                          //重启指令
-void Load(void* addr,int head,int sector,int num);                                  //从磁盘某个扇区加载数据
-void Write(void* addr,int head,int sector,int num);                                 //往磁盘某个扇区写入数据
 void RunProg(void* addr);                                               //跳转到某个地址执行程序
 void ClearCursor();

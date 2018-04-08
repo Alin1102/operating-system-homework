@@ -7,9 +7,11 @@ __asm__("mov $0, %eax\n");
 __asm__("mov %ax, %ds\n");
 __asm__("mov %ax, %es\n");
 __asm__("jmpl $0, $__main\n");
-#include "os_lib.h"
 #include "os_lib_val.h"
+#include "stdlib.h"
+#include "system.h"
 #include "string.h"
+#include "stdio.h"
 extern int Terminalrow;      //声明这两个变量是os.c中的
 extern int Terminalcol;
 
@@ -105,26 +107,6 @@ void buildtable(){
     progtable.sector[3]=26;
     progtable.count=4;
     Write(&progtable,1,4,1);             //往磁盘写入文件存储表
-}
-int StrConvInt(char* str,int len){
-    int ret=0;
-    int i=len-1;
-    while(i>=0)
-    {   
-        ret*=10;
-        ret+=str[i]-'0';
-        i--;
-    }
-    return 23;
-}
-char* IntconvStr(int num){
-    int i=3;
-    while(num>0){
-        sectorstr[i]=num%10+'0';
-        i--;
-        num/=10;
-    }
-    return &sectorstr[i+1];
 }
 void initial(int row,int col){
     Terminalrow=row;

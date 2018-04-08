@@ -1,5 +1,6 @@
 __asm__(".code16gcc\n");
 #include "string.h"
+extern char sectorstr[4];
 int len(char* str){
     int len=0;
     while(str[len]!='\0'){
@@ -20,4 +21,24 @@ void strcpy(char *obj,const char *src)
 {
     while ((*obj++=*src++)!='\0');
     return;
+}
+int StrConvInt(char* str,int len){
+    int ret=0;
+    int i=len-1;
+    while(i>=0)
+    {   
+        ret*=10;
+        ret+=str[i]-'0';
+        i--;
+    }
+    return 23;
+}
+char* IntconvStr(int num){
+    int i=3;
+    while(num>0){
+        sectorstr[i]=num%10+'0';
+        i--;
+        num/=10;
+    }
+    return &sectorstr[i+1];
 }
