@@ -1,43 +1,43 @@
 [BITS 16]
-global _Initial_Interrupt
 global _test_interrupt
-global _setTimerInterrupt
-extern _ClearScreen
-_Initial_Interrupt:
-	push ebp
-	mov ebp,esp
-    xor ax,ax
-    mov es,ax
-    mov dl,[ebp+08h]
-    mov bx,[ebp+0ch]
-    mov cx,[ebp+0eh]
-    mov al,4
-    mul dl
-    mov di,ax
-    mov word [es:di],bx
-    mov word [es:di+2],cx
-    pop ebp
-    pop ecx
-    jmp cx
+global _SetInterrupt
+global _Save_Interrupt
+global _Set_I_Flag
+global _Clear_I_Flag
+extern _interrupt_8
 
 _test_interrupt:
     int 08h
     pop ecx
     jmp cx
 
-_setTimerInterrupt:
-    xor ax,ax
-    mov es,ax   ;置es为0
-    push word [es:0x20]
-    push word [es:0x22]
-    push word [tmp]
-    push word 0
-    pop word [es:0x22]
-    pop word [es:0x20]
-    pop word [tmp+2]
-    pop word [tmp]
-    pop ecx
-    jmp cx
-datadef:
-    tmp dw _ClearScreen
+_SetInterrupt:
+    sti
+    mov ax,0
+    mov es,ax
+    mov al,4
+    mov dl,[esp+04h]
+    mul dl
+    mov di,ax
+    mov eax,[esp+08h]
+    mov [es:di],eax
+    cli
+    ret
+
+_Save_Interrupt:
+    mov ax,0
+    mov es,ax
+    mov al,4
+    mov dl,[esp+04h]
+    mul dl
+    mov di,ax
+    mov eax,[es:di]
+    ret
+
+_Set_I_Flag:
+    sti
+    ret
+_Clear_I_Flag:
+    cli
+    ret
     

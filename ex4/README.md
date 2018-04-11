@@ -54,6 +54,8 @@ OCW2 (EOI e 1, SL e 0, R e 0).
 
 ## 段间转移实现
 
+## iret指令详解
+>the IRET instruction pops the return instruction pointer, return code segment selector, and EFLAGS image from the stack to the EIP, CS, and EFLAGS registers, respectively, and then resumes execution of the interrupted program or procedure. If the return is to another privilege level, the IRET instruction also pops the stack pointer and SS from the stack, before resuming program execution.
 # 项目进度
 
 - [ ] 时钟中断自定义

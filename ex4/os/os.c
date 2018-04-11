@@ -22,13 +22,18 @@ char* Guide="                                      X OS                         
             "                                                                                ";
 char* TerminalSign="$"; //终端标志
 char* nullchar=" ";
+char* interrupt_success="We got it!";
 char userinput[80];     //用户输入的命令,用字符串保存起来
 char inputchar;         //用户单次键盘输入的字符
 int Terminalrow=0;      //当前光标位置,从这里进行字符串输出
 int Terminalcol=0;
+void show(){
+    print(interrupt_success,20,0,9,10);
+}
 int _main(){
-    setTimerInterrupt();
-    test_interrupt();
+    interrupt_8=Save_Interrupt(8);
+    SetInterrupt(8,show);
+    __asm__("int $0x8");
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
     print(Guide,0,0,480,10);        //打印系统引导界面
