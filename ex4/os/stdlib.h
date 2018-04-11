@@ -10,6 +10,7 @@ struct Proginfo{
 void Terminal();                
 void Wait_Task();
 void Task(char* userinput);                 //处理命令
+void Init_Interrupt();
 
 //os_lib.c的函数声明
 void Showtable();                           //打印文件存储表数据
