@@ -86,11 +86,7 @@ _Load:
     mov al, byte [ebp+18h]         ;扇区数
     mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
     mov dh, byte [ebp+10h]                 ;磁头号 ; 起始编号为0
-<<<<<<< HEAD
     mov ch, byte [ebp+0ch]               ;柱面号 ; 起始编号为0
-=======
-    mov ch, byte [ebp+0ch]                 ;柱面号 ; 起始编号为0
->>>>>>> 2330d7545bb7faf1ae13acd3e51f6e5ac5ad714e
     int 13H
 	pop ebp
 	pop ecx

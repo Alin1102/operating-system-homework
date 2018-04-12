@@ -53,12 +53,8 @@ void Task(char* userinput){
         void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                               //成功找到程序名对应的扇区
-<<<<<<< HEAD
         Load(p,1,1,6,1);
         //Load(p,sector/36,sector/36/18,sector/36%18,1);                                           //加载扇区数据到内存
-=======
-        Load(p,1,0,1,1);                                           //加载扇区数据到内存
->>>>>>> 2330d7545bb7faf1ae13acd3e51f6e5ac5ad714e
         ClearScreen(0,0,24,79,0);                                   //清屏
         RunProg(p);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
@@ -103,7 +99,6 @@ void print(char* str,int row,int col,int len,int style){
 void buildtable(){
     strcpy(progtable.name[0],"A.COM");
     progtable.size[0]=512;
-<<<<<<< HEAD
     progtable.sector[0]=57;
     strcpy(progtable.name[1],"B.COM");
     progtable.size[1]=512;
@@ -118,23 +113,6 @@ void buildtable(){
     progtable.size[4]=512;
     progtable.sector[4]=61;
     progtable.count=5;
-=======
-    progtable.sector[0]=33;
-    strcpy(progtable.name[1],"B.COM");
-    progtable.size[1]=512;
-    progtable.sector[1]=34;
-    strcpy(progtable.name[2],"C.COM");
-    progtable.size[2]=512;
-    progtable.sector[2]=35;
-    strcpy(progtable.name[3],"D.COM");
-    progtable.size[3]=512;
-    progtable.sector[3]=36;
-    strcpy(progtable.name[4],"E.COM");
-    progtable.size[4]=512;
-    progtable.sector[4]=37;
-    progtable.count=5;
-    Write(&progtable,1,14,1);             //往磁盘写入文件存储表
->>>>>>> 2330d7545bb7faf1ae13acd3e51f6e5ac5ad714e
 }
 void initial(int row,int col){
     Terminalrow=row;
