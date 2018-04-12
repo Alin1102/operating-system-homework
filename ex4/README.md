@@ -62,11 +62,15 @@ OCW2 (EOI e 1, SL e 0, R e 0).
 >the IRET instruction pops the return instruction pointer, return code segment selector, and EFLAGS image from the stack to the EIP, CS, and EFLAGS registers, respectively, and then resumes execution of the interrupted program or procedure. If the return is to another privilege level, the IRET instruction also pops the stack pointer and SS from the stack, before resuming program execution.
 
 ## INT 09H
+
+## 临时
+- 系统爆内存了,需要大改
+- 键盘扫描码还不是很清楚
 # 项目进度
 
 - [x] 时钟中断自定义
 - [x] 键盘响应自定义
-- [ ] 自由中断号调用
+- [x] 自由中断号调用
 - [ ] 三项新功能
 - [ ] 系统测试
 - [ ] FAT文件系统

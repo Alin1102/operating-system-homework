@@ -6,7 +6,6 @@ row equ 80          ;屏幕大小为80*25,同一列不同行的偏移是80
 org 0c100h          ;程序要被加载到的内存地址
 section .code
 main:
-    int 34h
     mov ax,0xb800           
     mov es,ax               ;es指向显存
     mov di,0                ;初始化di

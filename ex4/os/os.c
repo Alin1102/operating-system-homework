@@ -30,12 +30,14 @@ int Terminalcol=0;
 int interrupt_8;
 int interrupt_9;
 int interrupt_34;
+int interrupt_35;
+int interrupt_36;
+int interrupt_37;
 int _main(){
     Init_Interrupt();
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
     print(Guide,0,0,480,10);        //打印系统引导界面
-    __asm__("int $0x34");
     Listen_Keyboard();              
     ClearScreen(0,0,24,79,0);       //用户随意按下一个键后清屏
     Terminal();                     //进入终端模式
@@ -81,4 +83,10 @@ void Init_Interrupt(){
     SetInterrupt(9,Int09h);
     interrupt_34=Save_Interrupt(0x34);
     SetInterrupt(0x34,Int34h);
+    interrupt_35=Save_Interrupt(0x35);
+    SetInterrupt(0x35,Int35h);
+    interrupt_36=Save_Interrupt(0x36);
+    SetInterrupt(0x36,Int36h);
+    interrupt_37=Save_Interrupt(0x37);
+    SetInterrupt(0x37,Int37h);
 }

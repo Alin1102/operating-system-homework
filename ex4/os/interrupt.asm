@@ -5,9 +5,15 @@ global _Save_Interrupt
 global _Int08h
 global _Int09h
 global _Int34h
+global _Int35h
+global _Int36h
+global _Int37h
 extern _Print_Typing
 extern _Print_Type
-extern _Print_Test
+extern _Print_34H
+extern _Print_35H
+extern _Print_36H
+extern _Print_37H
 extern _interrupt_8
 extern _interrupt_9
 extern _interrupt_34
@@ -67,12 +73,43 @@ _Int09h:
 _Int34h:
     pusha
     push 0
-    call _Print_Test
+    call _Print_34H
     mov al,20h
     out 20h,al
     out 0A0h,al
     popa
     iret
+
+_Int35h:
+    pusha
+    push 0
+    call _Print_35H
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    popa
+    iret
+
+_Int36h:
+    pusha
+    push 0
+    call _Print_36H
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    popa
+    iret
+
+_Int37h:
+    pusha
+    push 0
+    call _Print_37H
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    popa
+    iret
+
 _Show_Time:
     mov ax,0xb800
     mov es,ax
