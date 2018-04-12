@@ -35,6 +35,9 @@ int interrupt_36;
 int interrupt_37;
 int _main(){
     Init_Interrupt();
+    void* p=(void*)0xEC00;          //操作系统结束,从这里开始放文件存储表
+    Load(p,1,1,7,1);                   //加载文件存储表
+    RunProg(p);
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
     print(Guide,0,0,480,10);        //打印系统引导界面
@@ -44,9 +47,9 @@ int _main(){
     return 0;
 }
 void Terminal(){
-    buildtable();                   //用来临时创建文件存储表的函数   
-    void* p=(void*)0xa600;          //操作系统结束,从这里开始放文件存储表
-    Load(p,1,4,1);                   //加载文件存储表
+    buildtable();
+    //void* tmp=(void*)0xEA00;          //操作系统结束,从这里开始放文件存储表
+    //Load(tmp,1,1,8,1);                   //加载文件存储表
     while(1){
         Terminalcol=0;
         print(TerminalSign,Terminalrow,0,1,10);     //打印终端符号

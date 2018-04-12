@@ -3,7 +3,7 @@ xdwon equ 24
 xleft equ 0
 xright equ 80       ;分别设置反弹的四个边界
 row equ 80          ;屏幕大小为80*25,同一列不同行的偏移是80
-org 0c100h          ;程序要被加载到的内存地址
+org 0ec00h          ;程序要被加载到的内存地址
 section .code
 main:
     mov ax,0xb800           

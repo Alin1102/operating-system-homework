@@ -5,7 +5,7 @@ xdwon equ 24
 xleft equ 82
 xright equ 158
 row equ 80
-org 0c100h
+org 0ec00h
 section .code
 main:
 mov ax,0xb800   
