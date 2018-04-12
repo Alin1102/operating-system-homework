@@ -88,5 +88,3 @@ movx dd 2
 movy dd 2
 dischar db 'A'
 color db 9
-times 510-($-$$) db 0
-dd 0xaa55

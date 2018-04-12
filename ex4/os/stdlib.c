@@ -105,7 +105,10 @@ void buildtable(){
     strcpy(progtable.name[3],"D.COM");
     progtable.size[3]=512;
     progtable.sector[3]=26;
-    progtable.count=4;
+    strcpy(progtable.name[4],"E.COM");
+    progtable.size[4]=512;
+    progtable.sector[4]=27;
+    progtable.count=5;
     Write(&progtable,1,4,1);             //往磁盘写入文件存储表
 }
 void initial(int row,int col){

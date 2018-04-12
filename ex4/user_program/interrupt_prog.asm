@@ -1,7 +1,5 @@
-;四个用户程序结构上都是一致的,所以就不再重复写了
-;在文件ball_left_up.asm中有非常详细的注释
-xup equ 26
-xdwon equ 48
+xup equ 2
+xdwon equ 24
 xleft equ 82
 xright equ 158
 row equ 80
@@ -82,7 +80,7 @@ mov [movx],bh
 mov [movy],bl 
 ret
 datadef:
-x dd 34
+x dd 8
 y dd 82
 movx dd 2
 movy dd 2

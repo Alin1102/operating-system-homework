@@ -6,6 +6,7 @@ row equ 80          ;屏幕大小为80*25,同一列不同行的偏移是80
 org 0c100h          ;程序要被加载到的内存地址
 section .code
 main:
+    int 34h
     mov ax,0xb800           
     mov es,ax               ;es指向显存
     mov di,0                ;初始化di
@@ -86,5 +87,3 @@ movx dd 2                   ;运动方向(偏移)
 movy dd 2   
 dischar  db 'A'             ;显示的字符
 color db 9                  ;显示的颜色
-times 510-($-$$) db 0       ;如果前面编译完超出一个扇区会报错
-dd 0xaa55                   ;这个其实没有必要,只是方便我整合二进制文件时方便找到边界
