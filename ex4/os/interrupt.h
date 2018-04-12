@@ -5,5 +5,4 @@ void Set_I_Flag();
 void Clear_I_Flag();
 void Int08h();
 void Int09h();
-int interrupt_8;
-int interrupt_9;
+void Int34h();

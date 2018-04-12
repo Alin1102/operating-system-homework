@@ -4,10 +4,13 @@ global _SetInterrupt
 global _Save_Interrupt
 global _Int08h
 global _Int09h
+global _Int34h
 extern _Print_Typing
 extern _Print_Type
+extern _Print_Test
 extern _interrupt_8
 extern _interrupt_9
+extern _interrupt_34
 _test_interrupt:
     int 08h
     pop ecx
@@ -41,6 +44,9 @@ _Int08h:
     call far [_interrupt_8]
     pusha
     call _Show_Time
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
     popa
     iret
 
@@ -48,30 +54,25 @@ _Int09h:
     pushf
     call far [_interrupt_9]
     pusha
-    jmp tmp
-temp:
-    mov ax, cs
-	mov ds, ax
-	mov es, ax
-	mov bl, 15
- 	mov cx, 6
- 	mov dl, 0
- 	mov dh, 20
- 	mov bp, Typ
-	mov al,1
-    mov bh,0          
-    push cs
-    pop es
-    mov ah,13h
-    int 10h
-tmp:
     in al,60h
     cmp al,10h
     jle _Show_Type
     call _Show_Typing
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
     popa
     iret
 
+_Int34h:
+    pusha
+    push 0
+    call _Print_Test
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    popa
+    iret
 _Show_Time:
     mov ax,0xb800
     mov es,ax

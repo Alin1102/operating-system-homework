@@ -27,11 +27,15 @@ char userinput[80];     //用户输入的命令,用字符串保存起来
 char inputchar;         //用户单次键盘输入的字符
 int Terminalrow=0;      //当前光标位置,从这里进行字符串输出
 int Terminalcol=0;
+int interrupt_8;
+int interrupt_9;
+int interrupt_34;
 int _main(){
     Init_Interrupt();
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
     print(Guide,0,0,480,10);        //打印系统引导界面
+    __asm__("int $0x34");
     Listen_Keyboard();              
     ClearScreen(0,0,24,79,0);       //用户随意按下一个键后清屏
     Terminal();                     //进入终端模式
@@ -75,4 +79,6 @@ void Init_Interrupt(){
     SetInterrupt(8,Int08h);
     interrupt_9=Save_Interrupt(9);
     SetInterrupt(9,Int09h);
+    interrupt_34=Save_Interrupt(0x34);
+    SetInterrupt(0x34,Int34h);
 }
