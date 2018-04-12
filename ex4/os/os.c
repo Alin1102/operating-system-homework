@@ -37,8 +37,8 @@ int _main(){
     Init_Interrupt();
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
-    print(Guide,0,0,480,10);        //打印系统引导界面
-    Listen_Keyboard();              
+    print(Guide,0,0,480,10);        //打印系统引导界面  
+    Listen_Keyboard();            
     ClearScreen(0,0,24,79,0);       //用户随意按下一个键后清屏
     Terminal();                     //进入终端模式
     return 0;
@@ -46,7 +46,7 @@ int _main(){
 void Terminal(){
     buildtable();                   //用来临时创建文件存储表的函数   
     void* p=(void*)0xa600;          //操作系统结束,从这里开始放文件存储表
-    Load(p,1,4,1);                   //加载文件存储表
+    Load(p,0,1,14,1);                   //加载文件存储表
     while(1){
         Terminalcol=0;
         print(TerminalSign,Terminalrow,0,1,10);     //打印终端符号
@@ -79,8 +79,8 @@ void Wait_Task(){
 void Init_Interrupt(){
     interrupt_8=Save_Interrupt(8);
     SetInterrupt(8,Int08h);
-    interrupt_9=Save_Interrupt(9);
-    SetInterrupt(9,Int09h);
+    //interrupt_9=Save_Interrupt(9);
+    //SetInterrupt(9,Int09h);
     interrupt_34=Save_Interrupt(0x34);
     SetInterrupt(0x34,Int34h);
     interrupt_35=Save_Interrupt(0x35);

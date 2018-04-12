@@ -81,12 +81,12 @@ _Load:
 	mov ds, ax
 	mov es, ax
 	mov bx, word [ebp+08h]         ;设置用户程序的加载的内存地址
-    mov cl, byte [ebp+10h] 
+    mov cl, byte [ebp+14h] 
     mov ah,2                 	   ;功能号(读)
-    mov al, byte [ebp+14h]         ;扇区数
+    mov al, byte [ebp+18h]         ;扇区数
     mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
-    mov dh, byte [ebp+0ch]                 ;磁头号 ; 起始编号为0
-    mov ch,0                 ;柱面号 ; 起始编号为0
+    mov dh, byte [ebp+10h]                 ;磁头号 ; 起始编号为0
+    mov ch, byte [ebp+0ch]                 ;柱面号 ; 起始编号为0
     int 13H
 	pop ebp
 	pop ecx

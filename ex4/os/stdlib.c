@@ -46,10 +46,14 @@ void Task(char* userinput){
         Terminalrow++;
     }
     else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令
+        
+    void* v=(void*)0xc100;
+    Load(v,1,0,1,1); 
+    RunProg(v);
         void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                               //成功找到程序名对应的扇区
-        Load(p,1,sector-18,1);                                           //加载扇区数据到内存
+        Load(p,1,0,1,1);                                           //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏
         RunProg(p);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
@@ -95,21 +99,21 @@ void buildtable(){
     struct Proginfo progtable;          //准备好结构体
     strcpy(progtable.name[0],"A.COM");
     progtable.size[0]=512;
-    progtable.sector[0]=23;
+    progtable.sector[0]=33;
     strcpy(progtable.name[1],"B.COM");
     progtable.size[1]=512;
-    progtable.sector[1]=24;
+    progtable.sector[1]=34;
     strcpy(progtable.name[2],"C.COM");
     progtable.size[2]=512;
-    progtable.sector[2]=25;
+    progtable.sector[2]=35;
     strcpy(progtable.name[3],"D.COM");
     progtable.size[3]=512;
-    progtable.sector[3]=26;
+    progtable.sector[3]=36;
     strcpy(progtable.name[4],"E.COM");
     progtable.size[4]=512;
-    progtable.sector[4]=27;
+    progtable.sector[4]=37;
     progtable.count=5;
-    Write(&progtable,1,4,1);             //往磁盘写入文件存储表
+    Write(&progtable,1,14,1);             //往磁盘写入文件存储表
 }
 void initial(int row,int col){
     Terminalrow=row;
