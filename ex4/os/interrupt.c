@@ -9,7 +9,7 @@ char* Int34h_info="34H know that!";
 char* Int35h_info="35H know that!";
 char* Int36h_info="36H know that!";
 char* Int37h_info="37H know that!";
-/*
+
 void print_frame(int x1,int y1,int x2,int y2){
     for(int i=x1;i<=x2;i++){
             WriteStr(frame_char,i,y1,1,15);
@@ -19,7 +19,7 @@ void print_frame(int x1,int y1,int x2,int y2){
         WriteStr(frame_char,x1,i,1,15);
         WriteStr(frame_char,x2,i,1,15);
     }
-}*/
+}
 void Print_Typing(){
     WriteStr(Typing,24,0,9,15);
 }
