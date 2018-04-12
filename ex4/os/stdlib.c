@@ -46,10 +46,6 @@ void Task(char* userinput){
         Terminalrow++;
     }
     else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令
-        
-    void* v=(void*)0xc100;
-    Load(v,1,0,1,1); 
-    RunProg(v);
         void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                               //成功找到程序名对应的扇区

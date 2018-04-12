@@ -47,15 +47,13 @@ _Save_Interrupt:
 
 _Int08h:
     pushf
-    pusha
-    pushf
     call far [_interrupt_8]
+    pusha
     call _Show_Time
     mov al,20h
     out 20h,al
     out 0A0h,al
     popa
-    popf
     iret
 
 _Int09h:
