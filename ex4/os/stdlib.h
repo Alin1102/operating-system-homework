@@ -19,7 +19,6 @@ void initial(int row,int col);              //设定光标位置
 void buildtable();                          //用来临时创建文件存储表的函数
 
 //os.asm的函数声明
-void WriteStr(char* str,int row,int col,int len,int style);             //在屏幕上某个位置打印字符串
 void ClearScreen(int x_top,int y_top,int x_down,int y_down,int isScroll);   //往屏幕某个区域清屏,或者执行滚屏
 void Shutdown();                                                        //关机指令
 void Reboot();                                                          //重启指令

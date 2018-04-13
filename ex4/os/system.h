@@ -1,4 +1,5 @@
-void WriteStr(char* str,int row,int col,int len,int style);             //在屏幕上某个位置打印字符串
+void WriteStr(char* str,int row,int col,int len,int style,int cursor);             //在屏幕上某个位置打印字符串
+void WriteInfo(char* str,int row,int col,int len,int style,int cursor);             //在屏幕上某个位置打印字符串
 void ClearScreen(int x_top,int y_top,int x_down,int y_down,int isScroll);   //往屏幕某个区域清屏,或者执行滚屏
 char Listen_Keyboard();                                                 //等待键盘输入,返回输入字符的ASCII
 void Shutdown();                                                        //关机指令

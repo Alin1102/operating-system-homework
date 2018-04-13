@@ -3,10 +3,6 @@
     Author:Xiejiangzhao
 */
 __asm__(".code16gcc\n");
-__asm__("mov $0, %eax\n");
-__asm__("mov %ax, %ds\n");
-__asm__("mov %ax, %es\n");
-__asm__("jmpl $0, $__main\n");
 #include "os_lib_val.h"
 #include "stdlib.h"
 #include "system.h"
@@ -36,7 +32,7 @@ void Task(char* userinput){
         ClearScreen(0,0,24,79,0);
         Terminalrow=0;
         Terminalcol=0;
-        WriteStr(FullName,0,0,2000,15);
+        WriteStr(FullName,0,0,2000,15,1);
         Listen_Keyboard();
         ClearScreen(0,0,24,79,0);
     }
@@ -49,8 +45,7 @@ void Task(char* userinput){
         void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                               //成功找到程序名对应的扇区
-        Load(p,1,1,6,1);
-        //Load(p,sector/36,sector/36/18,sector/36%18,1);                                           //加载扇区数据到内存
+        Load(p,1,1,sector%18,1);                                           //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏
         RunProg(p);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
@@ -67,7 +62,7 @@ void Task(char* userinput){
     }
 }
 void Showtable(){
-        struct Proginfo* Table=&progtable;        //初始化一个指针指向内存中存放文件存储表的地址
+        struct Proginfo* Table=(struct Proginfo*)Table_addr;        //初始化一个指针指向内存中存放文件存储表的地址
         for(int i = 0;i<Table->count;i++){                          //循环打印信息
             Terminalrow++;
             print(Table->name[i],Terminalrow,1,len(Table->name[i]),15); //打印程序名
@@ -76,7 +71,7 @@ void Showtable(){
         }
 }
 int run_resolve(char* src){
-    struct Proginfo* Table=&progtable;            //同样初始化指针
+    struct Proginfo* Table=(struct Proginfo*)Table_addr;            //同样初始化指针
     for(int i = 0;i<Table->count;i++){
             if(strcmp(Table->name[i],src,len(Table->name[i]))){     //比较程序名是否相同
                 return Table->sector[i];                            //相同返回该项的扇区
@@ -90,7 +85,7 @@ void print(char* str,int row,int col,int len,int style){
         Terminalrow--;                  //光标向上滚动
         row--;                          
     }
-    WriteStr(str,row,col,len,style);    //滚动完成,输出数据
+    WriteStr(str,row,col,len,style,1);    //滚动完成,输出数据
 }
 void buildtable(){
     strcpy(progtable.name[0],"A.COM");
@@ -109,6 +104,7 @@ void buildtable(){
     progtable.size[4]=512;
     progtable.sector[4]=61;
     progtable.count=5;
+    Write(&progtable,1,1,2,1);
 }
 void initial(int row,int col){
     Terminalrow=row;
