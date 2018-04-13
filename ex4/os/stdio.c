@@ -4,7 +4,7 @@ __asm__(".code16gcc\n");
 extern int Terminalrow;
 void print(char* str,int row,int col,int len,int style){
     while(row + len/80 > 23){           //如果要打印的信息超出了屏幕范围
-        ClearScreen(0,0,24,79,1);       //向上滚动一行
+        ClearScreen(0,0,23,79,1);       //向上滚动一行
         Terminalrow--;                  //光标向上滚动
         row--;                          
     }

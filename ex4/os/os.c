@@ -36,9 +36,9 @@ int interrupt_36;
 int interrupt_37;
 int interrupt_21;
 int _main(){
+    ClearScreen(0,0,24,79,0);
     Init_Interrupt();
     initial(0,0);       //初始化光标位置
-    WriteStr(TerminalSign,0,0,1,10,1);
     ClearScreen(0,0,24,79,0);       //清屏
     print(Guide,0,0,480,10);        //打印系统引导界面
     Listen_Keyboard();              

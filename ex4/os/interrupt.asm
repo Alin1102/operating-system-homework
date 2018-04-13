@@ -9,7 +9,7 @@ global _Int35h
 global _Int36h
 global _Int37h
 global _Int21h
-global _Int_ret
+global _Int_hard_ret
 extern _Print_Typing
 extern _Print_Type
 extern _Print_34H
@@ -56,7 +56,7 @@ _Int08h:
     pushf
     call far [_interrupt_8]
     call _Show_Time
-    jmp _Int_ret
+    jmp _Int_hard_ret
 
 _Int09h:
     push ds
@@ -77,7 +77,7 @@ _Int34h:
     pusha
     push 0
     call _Print_34H
-    jmp _Int_ret
+    jmp _Int_soft_ret
 
 _Int35h:
     push ds
@@ -86,7 +86,7 @@ _Int35h:
     pusha
     push 0
     call _Print_35H
-    jmp _Int_ret
+    jmp _Int_soft_ret
 
 _Int36h:
     push ds
@@ -95,7 +95,7 @@ _Int36h:
     pusha
     push 0
     call _Print_36H
-    jmp _Int_ret
+    jmp _Int_soft_ret
 
 _Int37h:
     push ds
@@ -104,7 +104,7 @@ _Int37h:
     pusha
     push 0
     call _Print_37H
-    jmp _Int_ret
+    jmp _Int_soft_ret
 
 _Int21h:
     push ds
@@ -117,12 +117,12 @@ _Int21h:
     je _Int21h_fn10
     cmp ah,16
     je _Int21h_fn16
-    jmp _Int_ret
+    jmp _Int_hard_ret
 
 _Int21h_fn9:
     mov ah,13h
     int 10h
-    jmp _Int_ret
+    jmp _Int_soft_ret
 
 _Int21h_fn10:
     mov ah, 06h
@@ -133,15 +133,21 @@ _Int21h_fn10:
 	mov cl, 0
 	mov ch, 0
 	int 10h
-    jmp _Int_ret
+    jmp _Int_soft_ret
 
 _Int21h_fn16:
     int 19h
-    jmp _Int_ret
-_Int_ret:
+    jmp _Int_soft_ret
+_Int_hard_ret:
     mov al,20h
     out 20h,al
     out 0A0h,al
+    popa
+    popf
+    pop es
+    pop ds
+    iret
+_Int_soft_ret:
     popa
     popf
     pop es
@@ -168,12 +174,12 @@ _Show_Time:
 _Show_Type:
     push 0
     call _Print_Type
-    jmp _Int_ret
+    jmp _Int_hard_ret
 
 _Show_Typing:
     push 0
     call _Print_Typing
-    jmp _Int_ret
+    jmp _Int_hard_ret
 
 _Reset_Offset:
     mov word [Interrupt_Offset],0
