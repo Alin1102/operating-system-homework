@@ -9,6 +9,7 @@ void Int34h();
 void Int35h();
 void Int36h();
 void Int37h();
+void Int21h();
 void Print_34H();
 void Print_35H();
 void Print_36H();

@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "os_lib_val.h": "c"
+        "os_lib_val.h": "c",
+        "system.h": "c",
+        "interrupt.h": "c"
     }
 }

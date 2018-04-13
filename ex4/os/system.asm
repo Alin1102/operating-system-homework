@@ -23,8 +23,6 @@ _WriteStr:
 	mov ax, word [ebp+1ch]
  	mov bp, word [ebp+08h]	;C从右向左压入参数 
     mov bh,0          
-    push cs
-    pop es
     mov ah,13h
     int 10h
     pop ebp

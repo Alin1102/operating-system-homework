@@ -8,6 +8,8 @@ global _Int34h
 global _Int35h
 global _Int36h
 global _Int37h
+global _Int21h
+global _Int_ret
 extern _Print_Typing
 extern _Print_Type
 extern _Print_34H
@@ -17,6 +19,7 @@ extern _Print_37H
 extern _interrupt_8
 extern _interrupt_9
 extern _interrupt_34
+extern _Shutdown
 _test_interrupt:
     int 08h
     pop ecx
@@ -110,6 +113,45 @@ _Int37h:
     popa
     iret
 
+_Int21h:
+    pusha
+    cmp ah,9
+    je _Int21h_fn9
+    cmp ah,10
+    je _Int21h_fn10
+    cmp ah,16
+    je _Int21h_fn16
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    popa
+    iret
+
+_Int21h_fn9:
+    mov ah,13h
+    int 10h
+    jmp _Int_ret
+
+_Int21h_fn10:
+    mov ah, 06h
+	mov al, 0
+	mov bh, 0fh
+	mov dl, 79
+	mov dh, 24
+	mov cl, 0
+	mov ch, 0
+	int 10h
+    jmp _Int_ret
+
+_Int21h_fn16:
+    int 19h
+    jmp _Int_ret
+_Int_ret:
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    popa
+    iret
 _Show_Time:
     mov ax,0xb800
     mov es,ax

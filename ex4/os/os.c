@@ -34,6 +34,7 @@ int interrupt_34;
 int interrupt_35;
 int interrupt_36;
 int interrupt_37;
+int interrupt_21;
 int _main(){
     Init_Interrupt();
     initial(0,0);       //初始化光标位置
@@ -91,4 +92,5 @@ void Init_Interrupt(){
     SetInterrupt(0x36,Int36h);
     interrupt_37=Save_Interrupt(0x37);
     SetInterrupt(0x37,Int37h);
+    SetInterrupt(0x21,Int21h);
 }
