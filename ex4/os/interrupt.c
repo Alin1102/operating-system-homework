@@ -9,10 +9,10 @@ char* Int35h_info="35H know that!";
 char* Int36h_info="36H know that!";
 char* Int37h_info="37H know that!";
 void Print_Typing(){
-    WriteInfo(Typing,24,0,9,15,1);
+    WriteStr(Typing,24,0,9,15,0);
 }
 void Print_Type(){
-    WriteInfo(Type,24,0,9,15,1);
+    WriteStr(Type,24,0,9,15,0);
 }
 void Print_Frame(int x1,int y1,int x2,int y2){
     for(int i=0;i<=y2;i++){

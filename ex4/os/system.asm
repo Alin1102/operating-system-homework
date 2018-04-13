@@ -8,7 +8,6 @@ global _Load
 global _RunProg
 global _Reboot
 global _Write
-global _WriteInfo
 global _ClearCursor
 [section .text]
 _WriteStr:
@@ -21,29 +20,8 @@ _WriteStr:
  	mov cx, word [ebp+14h]
  	mov dl, byte [ebp+10h]
  	mov dh, byte [ebp+0ch]
- 	mov bp, word [ebp+08h]	;C从右向左压入参数
-	mov al, 1
-    mov bh,0          
-    push cs
-    pop es
-    mov ah,13h
-    int 10h
-    pop ebp
-	pop ecx			;取出跳转的地址CS:IP
-	jmp cx			;跳转回到C部分继续执行
-	
-_WriteInfo:
-	push ebp
-	mov ebp,esp
-	mov ax, cs
-	mov ds, ax
-	mov es, ax
-	mov bl, byte [ebp+18h]
- 	mov cx, word [ebp+14h]
- 	mov dl, byte [ebp+10h]
- 	mov dh, byte [ebp+0ch]
- 	mov bp, word [ebp+08h]	;C从右向左压入参数
-	mov al, 0
+	mov ax, word [ebp+1ch]
+ 	mov bp, word [ebp+08h]	;C从右向左压入参数 
     mov bh,0          
     push cs
     pop es
