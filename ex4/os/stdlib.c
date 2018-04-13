@@ -3,7 +3,7 @@
     Author:Xiejiangzhao
 */
 __asm__(".code16gcc\n");
-#include "os_lib_val.h"
+#include "stdlib_val.h"
 #include "stdlib.h"
 #include "system.h"
 #include "string.h"
@@ -78,14 +78,6 @@ int run_resolve(char* src){
             }
         }
     return -1;                                                      //否则返回-1
-}
-void print(char* str,int row,int col,int len,int style){
-    while(row + len/80 > 23){           //如果要打印的信息超出了屏幕范围
-        ClearScreen(0,0,24,79,1);       //向上滚动一行
-        Terminalrow--;                  //光标向上滚动
-        row--;                          
-    }
-    WriteStr(str,row,col,len,style,1);    //滚动完成,输出数据
 }
 void buildtable(){
     strcpy(progtable.name[0],"A.COM");
