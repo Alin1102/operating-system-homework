@@ -49,71 +49,67 @@ _Save_Interrupt:
     ret
 
 _Int08h:
+    push ds
+    push es
+    pushf
+    pusha
     pushf
     call far [_interrupt_8]
-    pusha
     call _Show_Time
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Int_ret
 
 _Int09h:
+    push ds
+    push es
+    pushf
+    pusha
     pushf
     call far [_interrupt_9]
-    pusha
     in al,60h
     cmp al,10h
     jle _Show_Type
-    call _Show_Typing
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Show_Typing
 
 _Int34h:
+    push ds
+    push es
+    pushf
     pusha
     push 0
     call _Print_34H
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Int_ret
 
 _Int35h:
+    push ds
+    push es
+    pushf
     pusha
     push 0
     call _Print_35H
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Int_ret
 
 _Int36h:
+    push ds
+    push es
+    pushf
     pusha
     push 0
     call _Print_36H
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Int_ret
 
 _Int37h:
+    push ds
+    push es
+    pushf
     pusha
     push 0
     call _Print_37H
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Int_ret
 
 _Int21h:
+    push ds
+    push es
+    pushf
     pusha
     cmp ah,9
     je _Int21h_fn9
@@ -121,11 +117,7 @@ _Int21h:
     je _Int21h_fn10
     cmp ah,16
     je _Int21h_fn16
-    mov al,20h
-    out 20h,al
-    out 0A0h,al
-    popa
-    iret
+    jmp _Int_ret
 
 _Int21h_fn9:
     mov ah,13h
@@ -151,6 +143,9 @@ _Int_ret:
     out 20h,al
     out 0A0h,al
     popa
+    popf
+    pop es
+    pop ds
     iret
 _Show_Time:
     mov ax,0xb800
@@ -173,13 +168,12 @@ _Show_Time:
 _Show_Type:
     push 0
     call _Print_Type
-    popa
-    iret
+    jmp _Int_ret
 
 _Show_Typing:
     push 0
     call _Print_Typing
-    ret
+    jmp _Int_ret
 
 _Reset_Offset:
     mov word [Interrupt_Offset],0
