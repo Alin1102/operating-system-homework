@@ -15,7 +15,7 @@ void Print_Type(){
     WriteStr(Type,24,0,9,15,0);
 }
 void Print_Frame(int x1,int y1,int x2,int y2){
-    for(int i=0;i<=y2;i++){
+    for(int i=y1;i<=y2;i++){
         WriteStr(frame_char,x1,i,len(frame_char),15,1);
         WriteStr(frame_char,x2,i,len(frame_char),15,1);
     }

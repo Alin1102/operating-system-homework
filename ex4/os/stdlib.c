@@ -28,6 +28,30 @@ void Task(char* userinput){
         print(help_info,Terminalrow,1,len(help_info),15);
         Terminalrow+=len(help_info)/80;             
     }
+    else if(strcmp(userinput,test_key,len(test_key))){              //帮助命令
+        ClearScreen(0,0,24,79,0);
+        print(test_guide,0,10,len(test_guide),15);
+        Listen_Keyboard();
+        __asm__("int $0x34");
+        Listen_Keyboard();
+        ClearScreen(0,0,24,79,0);
+        print(test_guide,0,10,len(test_guide),15);
+        Listen_Keyboard();
+        __asm__("int $0x35");
+        Listen_Keyboard();
+        ClearScreen(0,0,24,79,0);
+        print(test_guide,0,10,len(test_guide),15);
+        Listen_Keyboard();
+        __asm__("int $0x36");
+        Listen_Keyboard();
+        ClearScreen(0,0,24,79,0);
+        print(test_guide,0,10,len(test_guide),15);
+        Listen_Keyboard();
+        __asm__("int $0x37");
+        Listen_Keyboard();
+        ClearScreen(0,0,24,79,0);
+        initial(0,0);
+    }
     else if(strcmp(userinput,uname_key,len(uname_key))){            //个人信息命令
         ClearScreen(0,0,24,79,0);
         Terminalrow=0;

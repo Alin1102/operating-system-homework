@@ -12,8 +12,10 @@ char* run_key="./";
 char* reboot_key="reboot";
 char* uname_key="uname";
 char* help_key="help";
+char* test_key="test";
 char* ls_head="Name      Size/K    Sector    ";             //文件存储表的数据项
 char* not_found="Program not found";                        //找不到对应用户程序的输出
+char* test_guide="Press any key to Test";
 char* FullName= "   =          =                                                                 "
                 "    =        =                                         =           =            "
                 "     =      =                     ==========          =            =            "
