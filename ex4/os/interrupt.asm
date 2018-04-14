@@ -117,6 +117,10 @@ _Int21h:
     je _Int21h_fn10
     cmp ah,16
     je _Int21h_fn16
+    cmp ah,19
+    je _Int21h_fn19
+    cmp ah,21
+    
     jmp _Int_soft_ret
 
 _Int21h_fn9:
@@ -147,6 +151,11 @@ _Int21h_fn16:
 	mov ch, 0
 	int 10h
     jmp _Int_soft_ret
+
+_Int21h_fn19:
+    call _Shutdown
+    jmp _Int_soft_ret
+
 _Int_hard_ret:
     mov al,20h
     out 20h,al

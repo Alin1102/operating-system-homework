@@ -49,7 +49,9 @@ char* help_info="ls                             Show the information of programs
                 "./ [Program]                   Run User Program                                 "
                 "clear                          Clear the Screen                                 "
                 "shutdown                       Power off the Computer                           "
-                "reboot                         Restart the Computer                             ";
+                "reboot                         Restart the Computer                             "
+                "reset_int                      Reset all modified interrupt                     "
+                "test                           Test 34-37H interrupt                            ";
 char sectorstr[4];//用于记录扇区由数字转换成字符串的数据
 extern int interrupt_8;
 extern int interrupt_9;

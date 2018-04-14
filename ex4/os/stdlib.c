@@ -46,17 +46,14 @@ void Task(char* userinput){
         Listen_Keyboard();
         __asm__("int $0x34");
         Listen_Keyboard();
-        ClearScreen(0,0,24,79,0);
         print(test_guide,0,10,len(test_guide),15);
         Listen_Keyboard();
         __asm__("int $0x35");
         Listen_Keyboard();
-        ClearScreen(0,0,24,79,0);
         print(test_guide,0,10,len(test_guide),15);
         Listen_Keyboard();
         __asm__("int $0x36");
         Listen_Keyboard();
-        ClearScreen(0,0,24,79,0);
         print(test_guide,0,10,len(test_guide),15);
         Listen_Keyboard();
         __asm__("int $0x37");
