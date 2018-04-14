@@ -26,7 +26,7 @@ _test_interrupt:
     jmp cx
 
 _SetInterrupt:
-    sti
+    cli
     mov ax,0
     mov es,ax
     mov al,4
@@ -35,7 +35,7 @@ _SetInterrupt:
     mov di,ax
     mov eax,[esp+08h]
     mov [es:di],eax
-    cli
+    sti
     ret
 
 _Save_Interrupt:
@@ -66,7 +66,7 @@ _Int09h:
     pushf
     call far [_interrupt_9]
     in al,60h
-    cmp al,10h
+    cmp al,01h
     jle _Show_Type
     jmp _Show_Typing
 
@@ -117,9 +117,11 @@ _Int21h:
     je _Int21h_fn10
     cmp ah,16
     je _Int21h_fn16
-    jmp _Int_hard_ret
+    jmp _Int_soft_ret
 
 _Int21h_fn9:
+    mov bh,0
+    mov al, 1
     mov ah,13h
     int 10h
     jmp _Int_soft_ret
@@ -136,7 +138,14 @@ _Int21h_fn10:
     jmp _Int_soft_ret
 
 _Int21h_fn16:
-    int 19h
+    mov ah, 06h
+	mov al, 1
+	mov bh, 0fh
+	mov dl, 79
+	mov dh, 24
+	mov cl, 0
+	mov ch, 0
+	int 10h
     jmp _Int_soft_ret
 _Int_hard_ret:
     mov al,20h
@@ -192,4 +201,3 @@ _datadef:
     Interrupt_Char db '-','/','|','\'
     Interrupt_Offset db 0
     _Int08h_Service dd 0
-    Typ db "Typing"

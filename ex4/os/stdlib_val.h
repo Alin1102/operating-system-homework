@@ -13,9 +13,11 @@ char* reboot_key="reboot";
 char* uname_key="uname";
 char* help_key="help";
 char* test_key="test";
+char* reset_key="reset_int";
 char* ls_head="Name      Size/K    Sector    ";             //文件存储表的数据项
 char* not_found="Program not found";                        //找不到对应用户程序的输出
 char* test_guide="Press any key to Test";
+char* reset_success="All interrupt reset success!";
 char* FullName= "   =          =                                                                 "
                 "    =        =                                         =           =            "
                 "     =      =                     ==========          =            =            "
@@ -49,3 +51,13 @@ char* help_info="ls                             Show the information of programs
                 "shutdown                       Power off the Computer                           "
                 "reboot                         Restart the Computer                             ";
 char sectorstr[4];//用于记录扇区由数字转换成字符串的数据
+extern int interrupt_8;
+extern int interrupt_9;
+extern int interrupt_34;
+extern int interrupt_35;
+extern int interrupt_36;
+extern int interrupt_37;
+extern int interrupt_21;
+extern int Terminalrow;      //声明这两个变量是os.c中的
+extern int Terminalcol;
+struct Proginfo progtable;          //准备好结构体

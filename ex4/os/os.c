@@ -92,5 +92,6 @@ void Init_Interrupt(){
     SetInterrupt(0x36,Int36h);
     interrupt_37=Save_Interrupt(0x37);
     SetInterrupt(0x37,Int37h);
+    interrupt_21=Save_Interrupt(0x21);
     SetInterrupt(0x21,Int21h);
 }

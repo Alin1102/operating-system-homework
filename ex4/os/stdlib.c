@@ -5,12 +5,10 @@
 __asm__(".code16gcc\n");
 #include "stdlib_val.h"
 #include "stdlib.h"
+#include "interrupt.h"
 #include "system.h"
 #include "string.h"
 #include "stdio.h"
-extern int Terminalrow;      //声明这两个变量是os.c中的
-extern int Terminalcol;
-struct Proginfo progtable;          //准备好结构体
 
 void Task(char* userinput){
     Terminalrow++;          //回车后光标要移到下一行
@@ -27,6 +25,20 @@ void Task(char* userinput){
     else if(strcmp(userinput,help_key,len(help_key))){              //帮助命令
         print(help_info,Terminalrow,1,len(help_info),15);
         Terminalrow+=len(help_info)/80;             
+    }
+    else if(strcmp(userinput,reset_key,len(reset_key))){              //帮助命令
+        SetInterrupt(8,(void*)interrupt_8);
+        SetInterrupt(9,(void*)interrupt_9);
+        SetInterrupt(0x34,(void*)interrupt_34);
+        SetInterrupt(0x35,(void*)interrupt_35);
+        SetInterrupt(0x36,(void*)interrupt_36);
+        SetInterrupt(0x37,(void*)interrupt_37);
+        SetInterrupt(0x21,(void*)interrupt_21);
+        ClearScreen(0,0,24,79,0);
+        print(reset_success,12,20,len(reset_success),15);
+        Listen_Keyboard();
+        ClearScreen(0,0,24,79,0);
+        initial(0,0);             
     }
     else if(strcmp(userinput,test_key,len(test_key))){              //帮助命令
         ClearScreen(0,0,24,79,0);
