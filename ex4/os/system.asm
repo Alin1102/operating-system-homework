@@ -4,7 +4,7 @@ global _WriteStr
 global _ClearScreen
 global _Listen_Keyboard
 global _Shutdown
-global _Load
+global _Disk
 global _RunProg
 global _Reboot
 global _Write
@@ -72,7 +72,7 @@ _Shutdown:
 _Reboot:
 	int 19h
 
-_Load:
+_Disk:
 	push ebp
 	mov ebp,esp
 	mov ax, cs
@@ -80,7 +80,8 @@ _Load:
 	mov es, ax
 	mov bx, word [ebp+08h]         ;设置用户程序的加载的内存地址
     mov cl, byte [ebp+14h] 
-    mov ah,2                 	   ;功能号(读)
+    mov ah, byte [ebp+1ch]                 	   ;功能号(读)
+	add ah,2
     mov al, byte [ebp+18h]         ;扇区数
     mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
     mov dh, byte [ebp+10h]                 ;磁头号 ; 起始编号为0
@@ -90,23 +91,6 @@ _Load:
 	pop ecx
 	jmp cx
 
-_Write:
-	push ebp
-	mov ebp,esp
-	mov ax, cs
-	mov ds, ax
-	mov es, ax
-	mov bx, word [ebp+08h]         ;设置用户程序的加载的内存地址
-    mov cl, byte [ebp+14h] 
-    mov ah,3                 	   ;功能号(读)
-    mov al, byte [ebp+18h]         ;扇区数
-    mov dl,0                 ;驱动器号 ; 软盘为0，硬盘和U盘为80H
-    mov dh, byte [ebp+10h]                 ;磁头号 ; 起始编号为0
-    mov ch, byte [ebp+0ch]               ;柱面号 ; 起始编号为0
-    int 13H
-	pop ebp
-	pop ecx
-	jmp cx	
 _RunProg:
 	mov bx,word [esp+04h]
 	call bx					;跳转到用户程序

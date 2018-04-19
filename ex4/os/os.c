@@ -8,11 +8,11 @@ __asm__("mov $0, %eax\n");
 __asm__("mov %ax, %ds\n");
 __asm__("mov %ax, %es\n");
 __asm__("jmpl $0, $__main\n");
-#include "stdio.h"
-#include "string.h"
-#include "stdlib.h"
-#include "system.h"
-#include "interrupt.h"
+#include "include/stdio.h"
+#include "include/string.h"
+#include "include/stdlib.h"
+#include "include/system.h"
+#include "include/interrupt.h"
 
 //用户引导界面
 char* Guide="                                      X OS                                      "
@@ -49,7 +49,7 @@ int _main(){
 void Terminal(){
     buildtable();
     void* tmp=(void*)0xEA00;          //操作系统结束,从这里开始放文件存储表
-    Load(tmp,1,1,2,1);                   //加载文件存储表
+    Disk(tmp,1,1,2,1,0);                   //加载文件存储表
     while(1){
         Terminalcol=0;
         print(TerminalSign,Terminalrow,0,1,10);     //打印终端符号

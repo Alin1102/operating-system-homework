@@ -1,6 +1,6 @@
 __asm__(".code16gcc\n");
-#include "system.h"
-#include "string.h"
+#include "include/system.h"
+#include "include/string.h"
 char* Typing="Typing...";
 char* Type="Type Free";
 char* frame_char="=";

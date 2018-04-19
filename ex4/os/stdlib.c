@@ -3,12 +3,12 @@
     Author:Xiejiangzhao
 */
 __asm__(".code16gcc\n");
-#include "stdlib_val.h"
-#include "stdlib.h"
-#include "interrupt.h"
-#include "system.h"
-#include "string.h"
-#include "stdio.h"
+#include "include/stdlib_val.h"
+#include "include/stdlib.h"
+#include "include/interrupt.h"
+#include "include/system.h"
+#include "include/string.h"
+#include "include/stdio.h"
 
 void Task(char* userinput){
     Terminalrow++;          //回车后光标要移到下一行
@@ -78,7 +78,7 @@ void Task(char* userinput){
         void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                               //成功找到程序名对应的扇区
-        Load(p,1,1,sector%18,1);                                           //加载扇区数据到内存
+        Disk(p,1,1,sector%18,1,0);                                           //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏
         RunProg(p);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
@@ -129,7 +129,7 @@ void buildtable(){
     progtable.size[4]=512;
     progtable.sector[4]=61;
     progtable.count=5;
-    Write(&progtable,1,1,2,1);
+    Disk(&progtable,1,1,2,1,1);
 }
 void initial(int row,int col){
     Terminalrow=row;
