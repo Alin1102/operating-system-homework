@@ -1,8 +1,0 @@
-<map id="os/stdlib.c" name="os/stdlib.c">
-<area shape="rect" id="node2" href="$stdlib__val_8h.html" title="include/stdlib_val.h" alt="" coords="5,80,136,107"/>
-<area shape="rect" id="node3" href="$stdlib_8h.html" title="include/stdlib.h" alt="" coords="160,80,269,107"/>
-<area shape="rect" id="node4" href="$interrupt_8h.html" title="include/interrupt.h" alt="" coords="293,80,419,107"/>
-<area shape="rect" id="node5" href="$system_8h.html" title="include/system.h" alt="" coords="443,80,565,107"/>
-<area shape="rect" id="node6" href="$string_8h.html" title="include/string.h" alt="" coords="589,80,699,107"/>
-<area shape="rect" id="node7" href="$stdio_8h.html" title="include/stdio.h" alt="" coords="724,80,831,107"/>
-</map>

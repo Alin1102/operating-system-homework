@@ -1,7 +1,0 @@
-<map id="Showtable" name="Showtable">
-<area shape="rect" id="node2" href="$stdio_8h.html#a86a187233215fa80436e6522abade7d4" title="print" alt="" coords="152,56,199,83"/>
-<area shape="rect" id="node3" href="$string_8h.html#a8de73c25cf5fbaae3ad794453a38f759" title="len" alt="" coords="290,5,329,32"/>
-<area shape="rect" id="node6" href="$string_8h.html#a82c439c149ac2d761c70c836118393ae" title="IntconvStr" alt="" coords="136,107,215,133"/>
-<area shape="rect" id="node4" href="$stdlib_8h.html#ab4e8b8602e6eefa0468f2215d8b00319" title="ClearScreen" alt="" coords="263,56,356,83"/>
-<area shape="rect" id="node5" href="$system_8h.html#ad9060707079fd5c16abfa39dfb18fc27" title="WriteStr" alt="" coords="274,107,345,133"/>
-</map>

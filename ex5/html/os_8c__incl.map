@@ -1,7 +1,0 @@
-<map id="os/os.c" name="os/os.c">
-<area shape="rect" id="node2" href="$stdio_8h.html" title="include/stdio.h" alt="" coords="5,80,112,107"/>
-<area shape="rect" id="node3" href="$string_8h.html" title="include/string.h" alt="" coords="137,80,247,107"/>
-<area shape="rect" id="node4" href="$stdlib_8h.html" title="include/stdlib.h" alt="" coords="272,80,381,107"/>
-<area shape="rect" id="node5" href="$system_8h.html" title="include/system.h" alt="" coords="406,80,527,107"/>
-<area shape="rect" id="node6" href="$interrupt_8h.html" title="include/interrupt.h" alt="" coords="552,80,677,107"/>
-</map>

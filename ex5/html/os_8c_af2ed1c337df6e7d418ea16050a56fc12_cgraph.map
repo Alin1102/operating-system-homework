@@ -1,7 +1,0 @@
-<map id="Wait_Task" name="Wait_Task">
-<area shape="rect" id="node2" href="$system_8h.html#ab2f7d63fe3e48def7239e8a662ccb080" title="Listen_Keyboard" alt="" coords="137,5,256,32"/>
-<area shape="rect" id="node3" href="$stdio_8h.html#a86a187233215fa80436e6522abade7d4" title="print" alt="" coords="173,56,220,83"/>
-<area shape="rect" id="node4" href="$string_8h.html#a8de73c25cf5fbaae3ad794453a38f759" title="len" alt="" coords="331,5,370,32"/>
-<area shape="rect" id="node5" href="$stdlib_8h.html#ab4e8b8602e6eefa0468f2215d8b00319" title="ClearScreen" alt="" coords="304,56,397,83"/>
-<area shape="rect" id="node6" href="$system_8h.html#ad9060707079fd5c16abfa39dfb18fc27" title="WriteStr" alt="" coords="315,107,386,133"/>
-</map>
