@@ -1,4 +1,5 @@
 <map id="os/include/interrupt.h" name="os/include/interrupt.h">
-<area shape="rect" id="node2" href="$os_8c.html" title="os/os.c" alt="" coords="5,80,71,107"/>
-<area shape="rect" id="node3" href="$stdlib_8c.html" title="os/stdlib.c" alt="" coords="95,80,178,107"/>
+<area shape="rect" id="node2" href="$interrupt_8c.html" title="os/interrupt.c" alt="" coords="5,80,104,107"/>
+<area shape="rect" id="node3" href="$os_8c.html" title="os/os.c" alt="" coords="129,80,194,107"/>
+<area shape="rect" id="node4" href="$stdlib_8c.html" title="os/stdlib.c" alt="" coords="219,80,301,107"/>
 </map>

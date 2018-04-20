@@ -1,0 +1,11 @@
+<map id="Init_Interrupt" name="Init_Interrupt">
+<area shape="rect" id="node2" href="$interrupt_8h.html#a08df3707211946831ba01619ec6b8da7" title="Save_Interrupt" alt="" coords="147,5,251,32"/>
+<area shape="rect" id="node3" href="$interrupt_8h.html#a5a62eefac4e29b5f7751078fa1ca468c" title="SetInterrupt" alt="" coords="154,56,243,83"/>
+<area shape="rect" id="node4" href="$interrupt_8h.html#aac5cd29242fd15805d23d3023d9b5ed7" title="Int08h" alt="" coords="170,107,227,133"/>
+<area shape="rect" id="node5" href="$interrupt_8h.html#a36bda8bc5e361b13b9deb46813023922" title="Int09h" alt="" coords="170,157,227,184"/>
+<area shape="rect" id="node6" href="$interrupt_8h.html#a87aa5386d440cba9c9a1b01296e1fe11" title="Int34h" alt="" coords="170,208,227,235"/>
+<area shape="rect" id="node7" href="$interrupt_8h.html#a4963071c8f259eaad351f89c49a83802" title="Int35h" alt="" coords="170,259,227,285"/>
+<area shape="rect" id="node8" href="$interrupt_8h.html#aca1039b60e7a9cf41eb9db99b6e16fb5" title="Int36h" alt="" coords="170,309,227,336"/>
+<area shape="rect" id="node9" href="$interrupt_8h.html#a210105f827392ebf6f63dde4d36c979f" title="Int37h" alt="" coords="170,360,227,387"/>
+<area shape="rect" id="node10" href="$interrupt_8h.html#a5c3062dab8b285a8c61dc88a45dc2842" title="Int21h" alt="" coords="170,411,227,437"/>
+</map>

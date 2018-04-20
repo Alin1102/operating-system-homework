@@ -3,6 +3,8 @@ void SetInterrupt(int num,void* program);
 int Save_Interrupt(int num);
 void Set_I_Flag();
 void Clear_I_Flag();
+void Init_Interrupt();
+void Reset_Interrupt();
 void Int08h();
 void Int09h();
 void Int34h();

@@ -16,9 +16,7 @@ extern _Print_34H
 extern _Print_35H
 extern _Print_36H
 extern _Print_37H
-extern _interrupt_8
-extern _interrupt_9
-extern _interrupt_34
+extern _Interrupt_Addr
 extern _Shutdown
 _test_interrupt:
     int 08h
@@ -54,7 +52,7 @@ _Int08h:
     pushf
     pusha
     pushf
-    call far [_interrupt_8]
+    call far [_Interrupt_Addr+4*8]
     call _Show_Time
     jmp _Int_hard_ret
 
@@ -64,7 +62,7 @@ _Int09h:
     pushf
     pusha
     pushf
-    call far [_interrupt_9]
+    call far [_Interrupt_Addr+4*9]
     in al,60h
     cmp al,01h
     jle _Show_Type

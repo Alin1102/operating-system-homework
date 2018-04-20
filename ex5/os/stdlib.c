@@ -27,13 +27,7 @@ void Task(char* userinput){
         Terminalrow+=len(help_info)/80;             
     }
     else if(strcmp(userinput,reset_key,len(reset_key))){              //帮助命令
-        SetInterrupt(8,(void*)interrupt_8);
-        SetInterrupt(9,(void*)interrupt_9);
-        SetInterrupt(0x34,(void*)interrupt_34);
-        SetInterrupt(0x35,(void*)interrupt_35);
-        SetInterrupt(0x36,(void*)interrupt_36);
-        SetInterrupt(0x37,(void*)interrupt_37);
-        SetInterrupt(0x21,(void*)interrupt_21);
+        Reset_Interrupt();
         ClearScreen(0,0,24,79,0);
         print(reset_success,12,20,len(reset_success),15);
         Listen_Keyboard();

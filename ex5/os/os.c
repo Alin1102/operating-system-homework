@@ -28,13 +28,6 @@ char userinput[80];     //用户输入的命令,用字符串保存起来
 char inputchar;         //用户单次键盘输入的字符
 int Terminalrow=0;      //当前光标位置,从这里进行字符串输出
 int Terminalcol=0;
-int interrupt_8;
-int interrupt_9;
-int interrupt_34;
-int interrupt_35;
-int interrupt_36;
-int interrupt_37;
-int interrupt_21;
 int _main(){
     ClearScreen(0,0,24,79,0);
     Init_Interrupt();
@@ -78,20 +71,4 @@ void Wait_Task(){
         else
             print(TerminalSign,Terminalrow,0,1,10);
     }
-}
-void Init_Interrupt(){
-    interrupt_8=Save_Interrupt(8);
-    SetInterrupt(8,Int08h);
-    interrupt_9=Save_Interrupt(9);
-    SetInterrupt(9,Int09h);
-    interrupt_34=Save_Interrupt(0x34);
-    SetInterrupt(0x34,Int34h);
-    interrupt_35=Save_Interrupt(0x35);
-    SetInterrupt(0x35,Int35h);
-    interrupt_36=Save_Interrupt(0x36);
-    SetInterrupt(0x36,Int36h);
-    interrupt_37=Save_Interrupt(0x37);
-    SetInterrupt(0x37,Int37h);
-    interrupt_21=Save_Interrupt(0x21);
-    SetInterrupt(0x21,Int21h);
 }
