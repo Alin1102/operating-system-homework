@@ -2,8 +2,6 @@
     os_lib_val.h存放了os_lib.c中的全局变量声明
     Author:Xiejiangzhao
 */
-#define Load_addr 0xEC00        //用户程序加载的内存地址LMA
-#define Table_addr 0xEA00       //文件存储表加载的内存地址
 char* unsupport="Command not found";    //指令不能识别的输出
 char* ls_key="ls";                                          //相关指令
 char* shutdown_key="shutdown";  
@@ -53,13 +51,7 @@ char* help_info="ls                             Show the information of programs
                 "reset_int                      Reset all modified interrupt                     "
                 "test                           Test 34-37H interrupt                            ";
 char sectorstr[4];//用于记录扇区由数字转换成字符串的数据
-extern int interrupt_8;
-extern int interrupt_9;
-extern int interrupt_34;
-extern int interrupt_35;
-extern int interrupt_36;
-extern int interrupt_37;
-extern int interrupt_21;
 extern int Terminalrow;      //声明这两个变量是os.c中的
 extern int Terminalcol;
 struct Proginfo progtable;          //准备好结构体
+void* seg,*offset,*addr;

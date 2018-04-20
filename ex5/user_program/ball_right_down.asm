@@ -1,13 +1,16 @@
 ;四个用户程序结构上都是一致的,所以就不再重复写了
 ;在文件ball_left_up.asm中有非常详细的注释
+
+org 100h
 xup equ 26
 xdwon equ 48
 xleft equ 82
 xright equ 158
 row equ 80
-org 0ec00h
 section .code
 main:
+mov ax,cs
+mov ds,ax
 mov ax,0xb800   
 mov es,ax       ;es指向显存
 mov di,0        ;初始化di
@@ -39,7 +42,7 @@ mov ah,0
 int 0x16
 cmp al,27
 jne $+3
-ret
+retf
 jmp shoot
 setoffset:
 cmp dh,xup

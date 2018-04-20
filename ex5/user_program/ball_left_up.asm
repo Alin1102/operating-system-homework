@@ -1,11 +1,13 @@
+org 100h
 xup equ 2       
 xdwon equ 24
 xleft equ 0
 xright equ 80       ;分别设置反弹的四个边界
 row equ 80          ;屏幕大小为80*25,同一列不同行的偏移是80
-org 0ec00h          ;程序要被加载到的内存地址
 section .code
 main:
+    mov ax,cs
+    mov ds,ax
     mov ax,0xb800           
     mov es,ax               ;es指向显存
     mov di,0                ;初始化di
@@ -37,7 +39,7 @@ mov ah,0
 int 0x16
 cmp al,27
 jne $+3
-ret
+retf
 jmp shoot
 setoffset:
 cmp dh,xup                  ;检查坐标是否到达边界,到达边界则改变运动方向

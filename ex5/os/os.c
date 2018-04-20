@@ -13,7 +13,7 @@ __asm__("jmpl $0, $__main\n");
 #include "include/stdlib.h"
 #include "include/system.h"
 #include "include/interrupt.h"
-
+#include "include/macro.h"
 //用户引导界面
 char* Guide="                                      X OS                                      "
             "================================================================================"
@@ -23,13 +23,11 @@ char* Guide="                                      X OS                         
             "                                                                                ";
 char* TerminalSign="$"; //终端标志
 char* nullchar=" ";
-char* interrupt_success="We got it!";
 char userinput[80];     //用户输入的命令,用字符串保存起来
 char inputchar;         //用户单次键盘输入的字符
 int Terminalrow=0;      //当前光标位置,从这里进行字符串输出
 int Terminalcol=0;
 int _main(){
-    ClearScreen(0,0,24,79,0);
     Init_Interrupt();
     initial(0,0);       //初始化光标位置
     ClearScreen(0,0,24,79,0);       //清屏
@@ -41,8 +39,8 @@ int _main(){
 }
 void Terminal(){
     buildtable();
-    void* tmp=(void*)0xEA00;          //操作系统结束,从这里开始放文件存储表
-    Disk(tmp,1,1,2,1,0);                   //加载文件存储表
+    void* tmp=(void*)Table_addr;          //操作系统结束,从这里开始放文件存储表
+    Disk((void*)0,tmp,1,1,2,1,0);                   //加载文件存储表TODO:
     while(1){
         Terminalcol=0;
         print(TerminalSign,Terminalrow,0,1,10);     //打印终端符号

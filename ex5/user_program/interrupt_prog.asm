@@ -1,6 +1,8 @@
-org 0EC00h
 section .code
+org 100h
 main:
+    mov ax,cs
+    mov ds,ax
     mov ah,0
     int 16h   
     mov bl, 15
@@ -26,7 +28,7 @@ main:
     int 21h
     mov ah,0
     int 16H
-    ret
+    retf
 
 datadef:
     Systemcall9 db "Systemcall 9H"

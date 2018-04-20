@@ -2,6 +2,9 @@ struct Proginfo{
     char name[8][16];
     int size[8];
     int sector[8];
+    int seg[8];
+    int offset[8];
+    int addr[8];
     int count;
 };
 void Terminal();                

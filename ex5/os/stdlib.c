@@ -9,7 +9,7 @@ __asm__(".code16gcc\n");
 #include "include/system.h"
 #include "include/string.h"
 #include "include/stdio.h"
-
+#include "include/macro.h"  
 void Task(char* userinput){
     Terminalrow++;          //回车后光标要移到下一行
     if(strcmp(userinput,clear_key,len(clear_key))){     //清屏命令
@@ -68,13 +68,12 @@ void Task(char* userinput){
         Showtable();                                                //打印数据
         Terminalrow++;
     }
-    else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令
-        void* p=(void*)Load_addr;                                   //指针指向用户程序要加载到的内存地址
+    else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令                          //指针指向用户程序要加载到的内存地址
         int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
-        if(sector>0){                                               //成功找到程序名对应的扇区
-        Disk(p,1,1,sector%18,1,0);                                           //加载扇区数据到内存
+        if(sector>0){                                         
+        Disk(seg,offset,1,1,sector%18,1,0);                       //TODO:                    //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏
-        RunProg(p);                                                 //运行用户程序
+        RunProg(addr);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
         initial(0,0);                                               //初始化光标
         }
@@ -101,6 +100,9 @@ int run_resolve(char* src){
     struct Proginfo* Table=(struct Proginfo*)Table_addr;            //同样初始化指针
     for(int i = 0;i<Table->count;i++){
             if(strcmp(Table->name[i],src,len(Table->name[i]))){     //比较程序名是否相同
+                seg=(void*)(Table->seg[i]);
+                offset=(void*)(Table->offset[i]);
+                addr=(void*)(Table->seg[i]*0x10000+Table->offset[i]);
                 return Table->sector[i];                            //相同返回该项的扇区
             }
         }
@@ -110,20 +112,30 @@ void buildtable(){
     strcpy(progtable.name[0],"A.COM");
     progtable.size[0]=512;
     progtable.sector[0]=57;
+    progtable.seg[0]=0x1000;
+    progtable.offset[0]=0x100;
     strcpy(progtable.name[1],"B.COM");
     progtable.size[1]=512;
     progtable.sector[1]=58;
+    progtable.seg[1]=0x2000;
+    progtable.offset[1]=0x100;
     strcpy(progtable.name[2],"C.COM");
     progtable.size[2]=512;
     progtable.sector[2]=59;
+    progtable.seg[2]=0x3000;
+    progtable.offset[2]=0x100;
     strcpy(progtable.name[3],"D.COM");
     progtable.size[3]=512;
     progtable.sector[3]=60;
+    progtable.seg[3]=0x4000;
+    progtable.offset[3]=0x100;
     strcpy(progtable.name[4],"E.COM");
     progtable.size[4]=512;
     progtable.sector[4]=61;
+    progtable.seg[4]=0x5000;
+    progtable.offset[4]=0x100;
     progtable.count=5;
-    Disk(&progtable,1,1,2,1,1);
+    Disk((void*)0,&progtable,1,1,2,1,1); //TODO:
 }
 void initial(int row,int col){
     Terminalrow=row;

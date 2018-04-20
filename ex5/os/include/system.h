@@ -4,3 +4,4 @@ char Listen_Keyboard();                                                 //等待
 void Shutdown();                                                        //关机指令
 void Reboot();                                                          //重启指令
 void RunProg(void* addr);                                               //跳转到某个地址执行程序
+void Disk(void* seg,void* offset,int cylinker,int head,int sector,int num,int command);                                  //从磁盘某个扇区加载数据
