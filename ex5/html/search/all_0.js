@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['_5f_5fasm_5f_5f',['__asm__',['../interrupt_8c.html#a0bf5d793fe7cf1fe5f9a630cd27f401e',1,'__asm__(&quot;.code16gcc\):&#160;interrupt.c'],['../os_8c.html#a0bf5d793fe7cf1fe5f9a630cd27f401e',1,'__asm__(&quot;.code16gcc\):&#160;os.c'],['../os_8c.html#ab6641120f68e80ccac3f93a7cb0c37ca',1,'__asm__(&quot;mov $0, %eax\):&#160;os.c'],['../os_8c.html#af337ecd6592a377e6921bfd20f58b460',1,'__asm__(&quot;mov %ax, %ds\):&#160;os.c'],['../os_8c.html#aa0d7df5cdfe025fa57669b92d295f083',1,'__asm__(&quot;mov %ax, %es\):&#160;os.c'],['../os_8c.html#a3ea589595ed8190fdf41e12bd0573f2b',1,'__asm__(&quot;jmpl $0, $__main\):&#160;os.c'],['../stdio_8c.html#a0bf5d793fe7cf1fe5f9a630cd27f401e',1,'__asm__(&quot;.code16gcc\):&#160;stdio.c'],['../stdlib_8c.html#a0bf5d793fe7cf1fe5f9a630cd27f401e',1,'__asm__(&quot;.code16gcc\):&#160;stdlib.c'],['../string_8c.html#a0bf5d793fe7cf1fe5f9a630cd27f401e',1,'__asm__(&quot;.code16gcc\):&#160;string.c']]],
+  ['_5fmain',['_main',['../os_8c.html#a6f2c0f4bbc65166d01847c6dd91f5380',1,'os.c']]]
+];

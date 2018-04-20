@@ -1,0 +1,16 @@
+void test_interrupt();
+void SetInterrupt(int num,void* program);
+int Save_Interrupt(int num);
+void Set_I_Flag();
+void Clear_I_Flag();
+void Int08h();
+void Int09h();
+void Int34h();
+void Int35h();
+void Int36h();
+void Int37h();
+void Int21h();
+void Print_34H();
+void Print_35H();
+void Print_36H();
+void Print_37H();
