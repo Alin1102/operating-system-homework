@@ -14,7 +14,7 @@ var searchData=
   ['stdlib_2ec',['stdlib.c',['../stdlib_8c.html',1,'']]],
   ['stdlib_2eh',['stdlib.h',['../stdlib_8h.html',1,'']]],
   ['stdlib_5fval_2eh',['stdlib_val.h',['../stdlib__val_8h.html',1,'']]],
-  ['strcmp',['strcmp',['../string_8h.html#a66c5a9a5043dcab21325a251c5727548',1,'strcmp(char *str1, char *str2, int len):&#160;string.c'],['../string_8c.html#a66c5a9a5043dcab21325a251c5727548',1,'strcmp(char *str1, char *str2, int len):&#160;string.c']]],
+  ['strcmp',['strcmp',['../string_8h.html#a66c5a9a5043dcab21325a251c5727548',1,'strcmp(char *str1, char *str2, int len):&#160;string.c'],['../string_8c.html#afbe2096deb1ebed97899acc5f7bbe9d5',1,'strcmp(char *str1, char *str2, int length):&#160;string.c']]],
   ['strconvint',['StrConvInt',['../string_8h.html#a70a42e19a504a189ec69654149a89dd6',1,'StrConvInt(char *str, int len):&#160;string.c'],['../string_8c.html#a70a42e19a504a189ec69654149a89dd6',1,'StrConvInt(char *str, int len):&#160;string.c']]],
   ['strcpy',['strcpy',['../string_8h.html#aa4d44cda98c28ce7240988ec85e5b02d',1,'strcpy(char *obj, const char *src):&#160;string.c'],['../string_8c.html#aa4d44cda98c28ce7240988ec85e5b02d',1,'strcpy(char *obj, const char *src):&#160;string.c']]],
   ['string_2ec',['string.c',['../string_8c.html',1,'']]],
