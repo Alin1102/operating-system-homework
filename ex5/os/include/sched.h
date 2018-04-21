@@ -2,5 +2,5 @@ struct general_register{
     short ax,bx,cx,dx,bp,sp,si,di,flag,cs,ds,ss,es;
 };
 struct task_struct{
-    general_register context;
+    struct general_register context;
 };

@@ -12,5 +12,6 @@ gcc -march=i386 -m32 -mpreferred-stack-boundary=2 -ffreestanding -c os/interrupt
 gcc -march=i386 -m32 -mpreferred-stack-boundary=2 -ffreestanding -c os/stdlib.c -o os/object_file/stdlib.o
 gcc -march=i386 -m32 -mpreferred-stack-boundary=2 -ffreestanding -c os/string.c -o os/object_file/string.o
 gcc -march=i386 -m32 -mpreferred-stack-boundary=2 -ffreestanding -c os/stdio.c -o os/object_file/stdio.o
-ld -m i386pe -N os/object_file/os_c.o os/object_file/interrupt.o os/object_file/stdlib.o os/object_file/string.o os/object_file/system.o os/object_file/interrupt_c.o os/object_file/stdio.o -o os/object_file/os.tmp -T os/linker.txt
+gcc -march=i386 -m32 -mpreferred-stack-boundary=2 -ffreestanding -c os/sched.c -o os/object_file/sched.o
+ld -m i386pe -N os/object_file/os_c.o os/object_file/interrupt.o os/object_file/stdlib.o os/object_file/string.o os/object_file/system.o os/object_file/interrupt_c.o os/object_file/stdio.o os/object_file/sched.o -o os/object_file/os.tmp -T os/linker.txt
 objcopy -O binary os/object_file/os.tmp os/object_file/os.img
