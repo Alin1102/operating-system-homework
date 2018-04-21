@@ -47,20 +47,22 @@ _Save_Interrupt:
     ret
 
 _Int08h:
+    pusha
     push ds
     push es
-    pushf
-    pusha
+    mov ax,cs
+    mov ds,ax
     pushf
     call far [_Interrupt_Addr+4*8]
     call _Show_Time
     jmp _Int_hard_ret
 
 _Int09h:
+    pusha
     push ds
     push es
-    pushf
-    pusha
+    mov ax,cs
+    mov ds,ax
     pushf
     call far [_Interrupt_Addr+4*9]
     in al,60h
@@ -69,46 +71,53 @@ _Int09h:
     jmp _Show_Typing
 
 _Int34h:
+    pusha
     push ds
     push es
-    pushf
-    pusha
+    mov ax,cs
+    mov ds,ax
     push 0
     call _Print_34H
     jmp _Int_soft_ret
 
 _Int35h:
+    pusha
     push ds
     push es
-    pushf
-    pusha
+    mov ax,cs
+    mov ds,ax
     push 0
     call _Print_35H
     jmp _Int_soft_ret
 
 _Int36h:
+    pusha
     push ds
     push es
-    pushf
-    pusha
+    mov ax,cs
+    mov ds,ax
     push 0
     call _Print_36H
     jmp _Int_soft_ret
 
 _Int37h:
+    pusha
     push ds
     push es
-    pushf
-    pusha
+    mov ax,cs
+    mov ds,ax
     push 0
     call _Print_37H
     jmp _Int_soft_ret
 
 _Int21h:
+    pusha
     push ds
     push es
-    pushf
     pusha
+    mov ax,cs
+    mov ds,ax
+    popa
     cmp ah,9
     je _Int21h_fn9
     cmp ah,10
@@ -158,16 +167,14 @@ _Int_hard_ret:
     mov al,20h
     out 20h,al
     out 0A0h,al
-    popa
-    popf
     pop es
     pop ds
+    popa
     iret
 _Int_soft_ret:
-    popa
-    popf
     pop es
     pop ds
+    popa
     iret
 _Show_Time:
     mov ax,0xb800
