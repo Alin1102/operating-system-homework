@@ -70,7 +70,10 @@ void Task(char* userinput){
         Terminalrow++;
     }
     else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令                          //指针指向用户程序要加载到的内存地址
-        int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
+        int sector=run_resolve(&userinput[2]);
+        sector=run_resolve("B.COM");
+        Disk(seg,offset,1,1,sector%18,1,0);
+        sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
         if(sector>0){                                         
         Disk(seg,offset,1,1,sector%18,1,0);                       //TODO:                    //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏

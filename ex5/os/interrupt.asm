@@ -20,6 +20,7 @@ extern _Print_37H
 extern _Interrupt_Addr
 extern _Shutdown
 extern _cur_process
+extern _Context_Switch
 _test_interrupt:
     int 08h
     pop ecx
@@ -116,6 +117,7 @@ _Int38h:
     pusha
     push ds
     push es
+    push ss
     sub sp,2
     mov bp,sp
     mov [ss:bp],sp
@@ -123,9 +125,24 @@ _Int38h:
     mov ax,0x0
     mov es,ax
     mov di,[es:_cur_process]
-    mov cx,30
+    mov cx,22
     cld
     rep movsb
+    mov ax,0x2000
+    mov ss,ax
+    mov ax,0xffff
+    mov sp,ax
+    push 0x0000
+    push 0x2000
+    push 0x0100
+    pusha
+    push 0x2000
+    push 0x2000
+    push 0xffe3
+    mov ax,0
+    mov ds,ax
+    push 0
+    call _Context_Switch
     jmp _Int38h_Restart
 
 _Int38h_Restart:
@@ -133,12 +150,12 @@ _Int38h_Restart:
     mov ds,ax
     mov bp,[_cur_process]
     mov si,bp
-    mov es,[ds:bp+4]
+    mov es,[ds:bp+6]
     mov di,[ds:bp]
-    mov cx,30
+    mov cx,22
     cld
     rep movsb
-    sub di,30
+    sub di,22
     mov ax,es
     mov ss,ax
     mov sp,di

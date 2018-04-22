@@ -8,3 +8,4 @@ struct PCB{
     int pid;
     struct general_register regs;
 };
+void Context_Switch();
