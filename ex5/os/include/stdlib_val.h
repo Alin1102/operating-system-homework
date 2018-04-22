@@ -53,5 +53,7 @@ char* help_info="ls                             Show the information of programs
 char sectorstr[4];//用于记录扇区由数字转换成字符串的数据
 extern int Terminalrow;      //声明这两个变量是os.c中的
 extern int Terminalcol;
+extern void* cur_process;
+extern struct PCB pcb[10];
 struct Proginfo progtable;          //准备好结构体
 void* seg,*offset,*addr;

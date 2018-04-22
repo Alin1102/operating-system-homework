@@ -1,6 +1,10 @@
 struct general_register{
-    short ax,bx,cx,dx,bp,sp,si,di,flag,cs,ds,ss,es;
+    short sp,ss;
+    short es,ds;
+    short di,si,bp,sp_tmp,bx,dx,cx,ax;
+    short ip,cs,flag;
 };
-struct task_struct{
-    struct general_register context;
+struct PCB{
+    int pid;
+    struct general_register regs;
 };

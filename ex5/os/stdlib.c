@@ -3,13 +3,14 @@
     Author:Xiejiangzhao
 */
 __asm__(".code16gcc\n");
-#include "include/stdlib_val.h"
 #include "include/stdlib.h"
 #include "include/interrupt.h"
 #include "include/system.h"
 #include "include/string.h"
 #include "include/stdio.h"
-#include "include/macro.h"  
+#include "include/macro.h"
+#include "include/sched.h"
+#include "include/stdlib_val.h"  
 void Task(char* userinput){
     Terminalrow++;          //回车后光标要移到下一行
     if(strcmp(userinput,clear_key,len(clear_key))){     //清屏命令
@@ -73,6 +74,8 @@ void Task(char* userinput){
         if(sector>0){                                         
         Disk(seg,offset,1,1,sector%18,1,0);                       //TODO:                    //加载扇区数据到内存
         ClearScreen(0,0,24,79,0);                                   //清屏
+        pcb[0].regs.sp=1;
+        cur_process=&pcb[0].regs;
         RunProg(addr);                                                 //运行用户程序
         ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
         initial(0,0);                                               //初始化光标

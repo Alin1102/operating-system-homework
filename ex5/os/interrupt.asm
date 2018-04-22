@@ -8,6 +8,7 @@ global _Int34h
 global _Int35h
 global _Int36h
 global _Int37h
+global _Int38h
 global _Int21h
 global _Int_hard_ret
 extern _Print_Typing
@@ -18,6 +19,7 @@ extern _Print_36H
 extern _Print_37H
 extern _Interrupt_Addr
 extern _Shutdown
+extern _cur_process
 _test_interrupt:
     int 08h
     pop ecx
@@ -110,6 +112,41 @@ _Int37h:
     call _Print_37H
     jmp _Int_soft_ret
 
+_Int38h:
+    pusha
+    push ds
+    push es
+    sub sp,2
+    mov bp,sp
+    mov [ss:bp],sp
+    mov si,sp
+    mov ax,0x0
+    mov es,ax
+    mov di,[es:_cur_process]
+    mov cx,30
+    cld
+    rep movsb
+    jmp _Int38h_Restart
+
+_Int38h_Restart:
+    mov ax,0
+    mov ds,ax
+    mov bp,[_cur_process]
+    mov si,bp
+    mov es,[ds:bp+4]
+    mov di,[ds:bp]
+    mov cx,30
+    cld
+    rep movsb
+    sub di,30
+    mov ax,es
+    mov ss,ax
+    mov sp,di
+    pop cx
+    pop es
+    pop ds
+    popa
+    iret
 _Int21h:
     pusha
     push ds

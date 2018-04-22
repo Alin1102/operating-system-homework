@@ -55,6 +55,8 @@ void Init_Interrupt(){
     SetInterrupt(0x36,Int36h);
     Interrupt_Addr[37]=Save_Interrupt(0x37);
     SetInterrupt(0x37,Int37h);
+    Interrupt_Addr[38]=Save_Interrupt(0x38);
+    SetInterrupt(0x38,Int38h);
     Interrupt_Addr[21]=Save_Interrupt(0x21);
     SetInterrupt(0x21,Int21h);
 }
@@ -65,5 +67,6 @@ void Reset_Interrupt(){
     SetInterrupt(0x35,(void*)Interrupt_Addr[35]);
     SetInterrupt(0x36,(void*)Interrupt_Addr[36]);
     SetInterrupt(0x37,(void*)Interrupt_Addr[37]);
+    SetInterrupt(0x38,(void*)Interrupt_Addr[38]);
     SetInterrupt(0x21,(void*)Interrupt_Addr[21]);
 }
