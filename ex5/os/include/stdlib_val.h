@@ -7,6 +7,7 @@ char* ls_key="ls";                                          //相关指令
 char* shutdown_key="shutdown";  
 char* clear_key="clear";
 char* run_key="./";
+char* load_key="load ";
 char* reboot_key="reboot";
 char* uname_key="uname";
 char* help_key="help";
@@ -57,3 +58,4 @@ extern void* cur_process;
 extern struct PCB pcb[10];
 struct Proginfo progtable;          //准备好结构体
 void* seg,*offset,*addr;
+int pcb_pos=0;

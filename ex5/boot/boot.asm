@@ -52,7 +52,7 @@ clear:
     ret
 delay:
     mov ah,86h              ;功能号
-    mov cx,0x1E     
+    mov cx,0x00     
     mov dx,0x8480           ;cx:dx表示延时的毫秒数  
     int 15h
     ret

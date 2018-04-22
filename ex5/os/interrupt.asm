@@ -10,6 +10,7 @@ global _Int36h
 global _Int37h
 global _Int38h
 global _Int21h
+global _Int38h_Restart
 global _Int_hard_ret
 extern _Print_Typing
 extern _Print_Type
@@ -21,6 +22,7 @@ extern _Interrupt_Addr
 extern _Shutdown
 extern _cur_process
 extern _Context_Switch
+extern _seg
 _test_interrupt:
     int 08h
     pop ecx
@@ -152,17 +154,18 @@ _Int38h_Restart:
     mov si,bp
     mov es,[ds:bp+6]
     mov di,[ds:bp]
-    mov cx,22
+    mov cx,46
     cld
     rep movsb
-    sub di,22
+    sub di,46
     mov ax,es
     mov ss,ax
     mov sp,di
     pop cx
+    pop cx
     pop es
     pop ds
-    popa
+    popad
     iret
 _Int21h:
     pusha

@@ -17,3 +17,4 @@ void Print_34H();
 void Print_35H();
 void Print_36H();
 void Print_37H();
+void Int38h_Restart();
