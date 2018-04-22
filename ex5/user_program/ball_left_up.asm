@@ -32,6 +32,7 @@ call setoffset              ;检查是否需要改变运动方向,如果需要�
 add dh,bh                   
 add dl,bl                   ;当前位置加上偏移得出下一个位置
 listenkeyboard:
+int 38h
 mov ah,1
 int 0x16
 jne $+5

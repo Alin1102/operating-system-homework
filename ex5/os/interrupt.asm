@@ -116,7 +116,7 @@ _Int37h:
     jmp _Int_soft_ret
 
 _Int38h:
-    pusha
+    pushad
     push ds
     push es
     push ss
@@ -127,20 +127,9 @@ _Int38h:
     mov ax,0x0
     mov es,ax
     mov di,[es:_cur_process]
-    mov cx,22
+    mov cx,46
     cld
     rep movsb
-    mov ax,0x2000
-    mov ss,ax
-    mov ax,0xffff
-    mov sp,ax
-    push 0x0000
-    push 0x2000
-    push 0x0100
-    pusha
-    push 0x2000
-    push 0x2000
-    push 0xffe3
     mov ax,0
     mov ds,ax
     push 0

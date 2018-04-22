@@ -2,6 +2,7 @@ __asm__(".code16gcc\n");
 #include "include/sched.h"
 struct PCB pcb[10];
 void* cur_process;
+extern int pcb_pos;
 extern void* seg,*offset;
 void Init_ProcessPCB(int pid){
     pcb[pid].regs.sp=0xffd1;
@@ -14,10 +15,6 @@ void Init_ProcessPCB(int pid){
     pcb[pid].regs.ip=(short)offset;
 }
 void Context_Switch(){
-    pcb[1].regs.ss=(void*)0x2000;
-    pcb[1].regs.sp=(void*)0xffe3;
-    pcb[1].regs.ds=(void*)0x2000;
-    pcb[1].regs.sp_tmp=(void*)0xffe3;
-    pcb[1].regs.ds=(void*)0x2000;
-    cur_process=&pcb[1].regs;
+    pcb_pos=(pcb_pos+1)%2;
+    cur_process=&pcb[pcb_pos].regs;
 }

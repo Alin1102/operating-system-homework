@@ -89,11 +89,11 @@ void Task(char* userinput){
         Disk(seg,offset,1,1,sector%18,1,0);
         Init_Process(seg);
         Init_ProcessPCB(pcb_pos);
-        cur_process=&pcb[0].regs;
-        Int38h_Restart();
-        pcb_pos++;
+        cur_process=&pcb[pcb_pos].regs;
+        pcb_pos=(pcb_pos+1)%2;
         }
-        else{                                                       //找不到程序信息
+        else{
+        Int38h_Restart();                                                       //找不到程序信息
         print(not_found,Terminalrow,1,len(not_found),15);           //打印错误信息
         Terminalrow++;
         }
