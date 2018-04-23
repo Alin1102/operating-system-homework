@@ -9,8 +9,8 @@ main:
     mov ax,0
     mov di,ax
     mov bx,'A'
-loopa:
     sti
+loopa:
     mov byte [es:di+2],bl
     mov byte [es:di+3],15
     cmp bx,'Z'
