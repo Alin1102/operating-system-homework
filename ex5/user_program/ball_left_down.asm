@@ -33,7 +33,6 @@ call setoffset
 add dh,bh
 add dl,bl
 listenkeyboard:
-int 38h
 mov ah,1
 int 0x16
 jne $+5

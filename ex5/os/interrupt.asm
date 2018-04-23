@@ -52,15 +52,24 @@ _Save_Interrupt:
     ret
 
 _Int08h:
-    pusha
+    pushad
     push ds
     push es
+    mov ax,ss
+    cmp ax,0
+    jne _here
     mov ax,cs
     mov ds,ax
     pushf
     call far [_Interrupt_Addr+4*8]
     call _Show_Time
-    jmp _Int_hard_ret
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
+    pop es
+    pop ds
+    popad
+    iret
 
 _Int09h:
     pusha
@@ -119,6 +128,7 @@ _Int38h:
     pushad
     push ds
     push es
+_here:
     push ss
     sub sp,2
     mov bp,sp
@@ -155,6 +165,9 @@ _Int38h_Restart:
     pop es
     pop ds
     popad
+    mov al,20h
+    out 20h,al
+    out 0A0h,al
     iret
 _Int21h:
     pusha

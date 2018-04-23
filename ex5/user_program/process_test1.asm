@@ -10,12 +10,12 @@ main:
     mov di,ax
     mov bx,'A'
 loopa:
+    sti
     mov byte [es:di],bl
     mov byte [es:di+1],15
     cmp bx,'Z'
     jge reset
     inc bx
-    int 38h
     jmp loopa
 reset:
     mov bx,'A'
