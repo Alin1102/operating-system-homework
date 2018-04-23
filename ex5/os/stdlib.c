@@ -89,7 +89,7 @@ void Task(char* userinput){
         Init_Process(seg);
         Init_ProcessPCB(pcb_pos);
         cur_process=&pcb[pcb_pos].regs;
-        pcb_pos=(pcb_pos+1)%2;
+        pcb_pos=(pcb_pos+1)%4;
         }
         else{
         Int38h_Restart();                                                       //找不到程序信息
@@ -159,7 +159,17 @@ void buildtable(){
     progtable.sector[6]=63;
     progtable.seg[6]=0x7000;
     progtable.offset[6]=0x100;
-    progtable.count=7;
+    strcpy(progtable.name[7],"H.COM");
+    progtable.size[7]=512;
+    progtable.sector[7]=64;
+    progtable.seg[7]=0x8000;
+    progtable.offset[7]=0x100;
+    strcpy(progtable.name[8],"I.COM");
+    progtable.size[8]=512;
+    progtable.sector[8]=65;
+    progtable.seg[8]=0x9000;
+    progtable.offset[8]=0x100;
+    progtable.count=9;
     Disk((void*)0,&progtable,1,1,2,1,1); //TODO:
 }
 void initial(int row,int col){

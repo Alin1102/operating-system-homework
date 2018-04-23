@@ -9,4 +9,7 @@ dd if=user_program/ball_right_down.img of=merge.img bs=512 seek=59 count=1 conv=
 dd if=user_program/interrupt_prog.img of=merge.img bs=512 seek=60 count=1 conv=[notrunc,sync]
 dd if=user_program/process_test1.img of=merge.img bs=512 seek=61 count=1 conv=[notrunc,sync]
 dd if=user_program/process_test2.img of=merge.img bs=512 seek=62 count=1 conv=[notrunc,sync]
+dd if=user_program/process_test3.img of=merge.img bs=512 seek=63 count=1 conv=[notrunc,sync]
+dd if=user_program/process_test4.img of=merge.img bs=512 seek=64 count=1 conv=[notrunc,sync]
+
 REM dd if=/dev/zero of=merge.img bs=512 seek=27 count=2853

@@ -6,7 +6,7 @@ main:
     mov ax,(18*80+60)*2
     mov di,ax
 run:
-    mov byte [es:di],'2'
+    mov byte [es:di],'4'
     mov byte [es:di+1],15
     mov byte[es:di-2],0
     add di,2
