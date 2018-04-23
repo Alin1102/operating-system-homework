@@ -1,23 +1,19 @@
 section .code
 org 100h
 main:
-    mov ax,cs
-    mov ds,ax
-    mov ss,ax
     mov ax,0xb800
     mov es,ax
-    mov ax,0
+    mov ax,(6*80+60)*2
     mov di,ax
-    mov bx,'A'
-    sti
-loopa:
-    mov byte [es:di+2],bl
-    mov byte [es:di+3],15
-    cmp bx,'Z'
-    jge reset
-    inc bx
-    jmp loopa
+run:
+    mov byte [es:di],'2'
+    mov byte [es:di+1],15
+    mov byte[es:di-2],0
+    add di,2
+    cmp di,(6*80+79)*2
+    je reset
+    jmp run
 reset:
-    mov bx,'A'
-    jmp loopa
-    jmp main
+    mov byte [es:di-2],0 
+    mov di,(6*80+60)*2
+    jmp run
