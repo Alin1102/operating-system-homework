@@ -150,7 +150,17 @@ void buildtable(){
     progtable.sector[4]=61;
     progtable.seg[4]=0x5000;
     progtable.offset[4]=0x100;
-    progtable.count=5;
+    strcpy(progtable.name[5],"F.COM");
+    progtable.size[5]=512;
+    progtable.sector[5]=62;
+    progtable.seg[5]=0x6000;
+    progtable.offset[5]=0x100;
+    strcpy(progtable.name[6],"G.COM");
+    progtable.size[6]=512;
+    progtable.sector[6]=63;
+    progtable.seg[6]=0x7000;
+    progtable.offset[6]=0x100;
+    progtable.count=7;
     Disk((void*)0,&progtable,1,1,2,1,1); //TODO:
 }
 void initial(int row,int col){
