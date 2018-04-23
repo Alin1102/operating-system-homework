@@ -2,7 +2,6 @@
     os_lib.c实现了很多细致的函数
     Author:Xiejiangzhao
 */
-__asm__(".code16gcc\n");
 #include "include/stdlib.h"
 #include "include/interrupt.h"
 #include "include/system.h"

@@ -10,7 +10,7 @@ nasm -f bin user_program/ball_right_down.asm -o user_program/ball_right_down.img
 nasm -f bin user_program/interrupt_prog.asm -o user_program/interrupt_prog.img
 nasm -f bin user_program/process_test1.asm -o user_program/process_test1.img
 nasm -f bin user_program/process_test2.asm -o user_program/process_test2.img
-set gcc_method=-march=i386 -m32 -mpreferred-stack-boundary=2 -ffreestanding -c
+set gcc_method=-march=i386 -m16 -mpreferred-stack-boundary=2 -ffreestanding -c
 gcc %gcc_method% os/os.c -o os/object_file/os_c.o
 gcc %gcc_method% os/interrupt.c -o os/object_file/interrupt_c.o
 gcc %gcc_method% os/stdlib.c -o os/object_file/stdlib.o

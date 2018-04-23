@@ -2,8 +2,6 @@
     引导结束后,系统从这里开始执行
     Author:Xiejiangzhao
 */
-
-__asm__(".code16gcc\n");
 __asm__("mov $0, %eax\n");
 __asm__("mov %ax, %ds\n");
 __asm__("mov %ax, %es\n");

@@ -1,4 +1,3 @@
-__asm__(".code16gcc\n");
 #include "include/stdio.h"
 #include "include/system.h"
 extern int Terminalrow;

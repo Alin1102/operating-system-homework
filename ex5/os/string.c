@@ -1,4 +1,3 @@
-__asm__(".code16gcc\n");
 #include "include/string.h"
 extern char sectorstr[4];
 int len(char* str){

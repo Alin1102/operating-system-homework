@@ -1,4 +1,3 @@
-__asm__(".code16gcc\n");
 #include "include/system.h"
 #include "include/string.h"
 #include "include/interrupt.h"
