@@ -69,18 +69,7 @@ void Task(char* userinput){
         Terminalrow++;
     }
     else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令                          //指针指向用户程序要加载到的内存地址                                 //指针指向用户程序要加载到的内存地址
-        int sector=run_resolve(&userinput[2]);                      //取得用户程序在软盘中的扇区
-        if(sector>0){                                               //成功找到程序名对应的扇区
-        Disk(seg,offset,1,1,sector%18,1,0);                                           //加载扇区数据到内存
-        ClearScreen(0,0,24,79,0);                                   //清屏
-        RunProg(addr);                                                 //运行用户程序
-        ClearScreen(0,0,24,79,0);                                   //运行结束返回操作系统清屏
-        initial(0,0);                                               //初始化光标
-        }
-        else{                                                       //找不到程序信息
-        print(not_found,Terminalrow,1,len(not_found),15);           //打印错误信息
-        Terminalrow++;
-        }
+        Int38h_Restart();
     }
     else if(strcmp(userinput,load_key,len(load_key)-1)){                  //打印文件存储表命令
         int sector=run_resolve(&userinput[5]);
@@ -92,7 +81,6 @@ void Task(char* userinput){
         pcb_pos=(pcb_pos+1)%4;
         }
         else{
-        Int38h_Restart();                                                       //找不到程序信息
         print(not_found,Terminalrow,1,len(not_found),15);           //打印错误信息
         Terminalrow++;
         }

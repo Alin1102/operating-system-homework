@@ -1,10 +1,10 @@
 struct Proginfo{
-    char name[8][16];
-    int size[8];
-    int sector[8];
-    int seg[8];
-    int offset[8];
-    int addr[8];
+    char name[10][16];
+    int size[10];
+    int sector[10];
+    int seg[10];
+    int offset[10];
+    int addr[10];
     int count;
 };
 void Terminal();                

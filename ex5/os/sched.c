@@ -13,8 +13,12 @@ void Init_ProcessPCB(int pid){
     pcb[pid].regs.cs=(short)seg;
     pcb[pid].regs.ip=(short)offset;
     pcb[pid].regs.flag=0x0200;
+    pcb[pid].occupied=1;
+    //strcpy(pcb[pid].name,name);
 }
 void Context_Switch(){
-    pcb_pos=(pcb_pos+1)%4;
+        pcb_pos=(pcb_pos+1)%4;
+    while(pcb[pcb_pos].occupied!=1)
+        pcb_pos=(pcb_pos+1)%4;
     cur_process=&pcb[pcb_pos].regs;
 }
