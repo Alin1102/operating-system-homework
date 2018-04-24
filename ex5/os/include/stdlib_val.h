@@ -8,6 +8,7 @@ char* shutdown_key="shutdown";
 char* clear_key="clear";
 char* run_key="./";
 char* load_key="load ";
+char* show_proc_key="show proc";
 char* reboot_key="reboot";
 char* uname_key="uname";
 char* help_key="help";

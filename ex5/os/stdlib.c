@@ -68,15 +68,19 @@ void Task(char* userinput){
         Showtable();                                                //打印数据
         Terminalrow++;
     }
-    else if(strcmp(userinput,run_key,len(run_key))){                //运行用户程序命令                          //指针指向用户程序要加载到的内存地址                                 //指针指向用户程序要加载到的内存地址
+    else if(strcmp(userinput,run_key,len(run_key))){ 
+        SetBegProc(&userinput[2]);
         Int38h_Restart();
+    }
+    else if(strcmp(userinput,show_proc_key,len(show_proc_key))){         
+        ShowProcess();
     }
     else if(strcmp(userinput,load_key,len(load_key)-1)){                  //打印文件存储表命令
         int sector=run_resolve(&userinput[5]);
         if(sector>0){                                               //成功找到程序名对应的扇区
         Disk(seg,offset,1,1,sector%18,1,0);
         Init_Process(seg);
-        Init_ProcessPCB(pcb_pos);
+        Init_ProcessPCB(pcb_pos,&userinput[5]);
         cur_process=&pcb[pcb_pos].regs;
         pcb_pos=(pcb_pos+1)%4;
         }
@@ -91,12 +95,13 @@ void Task(char* userinput){
     }
 }
 void Showtable(){
+        Disk((void*)0,(void*)Table_addr,1,1,2,1,0);
         struct Proginfo* Table=(struct Proginfo*)Table_addr;        //初始化一个指针指向内存中存放文件存储表的地址
         for(int i = 0;i<Table->count;i++){                          //循环打印信息
             Terminalrow++;
             print(Table->name[i],Terminalrow,1,len(Table->name[i]),15); //打印程序名
-            print(IntconvStr(Table->size[i]),Terminalrow,11,10,15);     //打印程序大小
-            print(IntconvStr(Table->sector[i]),Terminalrow,21,10,15);   //打印程序所在扇区
+            print(IntconvStr(Table->size[i]),Terminalrow,11,len(IntconvStr(Table->size[i])),15);     //打印程序大小
+            print(IntconvStr(Table->sector[i]),Terminalrow,21,len(IntconvStr(Table->sector[i])),15);   //打印程序所在扇区
         }
 }
 int run_resolve(char* src){
@@ -110,6 +115,14 @@ int run_resolve(char* src){
             }
         }
     return -1;                                                      //否则返回-1
+}
+void ShowProcess(){
+        for(int i = 0;i<4;i++){
+            if(pcb[i].occupied){
+            print(pcb[i].name,Terminalrow,1,len(pcb[i].name),15);            //循环打印信息
+            Terminalrow++;
+            } //   //打印程序所在扇区
+        }
 }
 void buildtable(){
     strcpy(progtable.name[0],"A.COM");

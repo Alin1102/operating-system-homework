@@ -12,7 +12,8 @@ void Wait_Task();
 void Task(char* userinput);                 //处理命令
 
 //os_lib.c的函数声明
-void Showtable();                           //打印文件存储表数据
+void Showtable();             
+void ShowProcess();              //打印文件存储表数据
 int run_resolve(char* src);                 //传入用户程序的程序名,返回用户程序在软盘中的扇区,找不到返回-1
 void initial(int row,int col);              //设定光标位置                   
 void buildtable();                          //用来临时创建文件存储表的函数
