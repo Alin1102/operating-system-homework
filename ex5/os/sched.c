@@ -1,9 +1,12 @@
 #include "include/sched.h"
 #include "include/string.h"
+#include "include/macro.h"
+#include "include/stdio.h"
 struct PCB pcb[10];
 void *cur_process;
 extern int pcb_pos;
 extern void *seg, *offset;
+extern int Terminalrow;
 void Init_ProcessPCB(int pid, char *name)
 {
     pcb[pid].regs.sp = 0xffd1;
@@ -20,19 +23,31 @@ void Init_ProcessPCB(int pid, char *name)
 }
 void Context_Switch()
 {
-    pcb_pos = (pcb_pos + 1) % 4;
+    pcb_pos = (pcb_pos + 1) % Proc_Limit;
     while (pcb[pcb_pos].occupied != 1)
-        pcb_pos = (pcb_pos + 1) % 4;
+        pcb_pos = (pcb_pos + 1) % Proc_Limit;
     cur_process = &pcb[pcb_pos].regs;
 }
 void SetBegProc(char *name)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < Proc_Limit; i++)
     {
         if (pcb[i].occupied && strcmp(name, pcb[i].name, len(name)))
         {
             cur_process = &pcb[i].regs;
             return;
         }
+    }
+}
+
+void ShowProcess()
+{
+    for (int i = 0; i < Proc_Limit; i++)
+    {
+        if (pcb[i].occupied)
+        {
+            print(pcb[i].name, Terminalrow, 1, len(pcb[i].name), 15); //循环打印信息
+            Terminalrow++;
+        } //   //打印程序所在扇区
     }
 }

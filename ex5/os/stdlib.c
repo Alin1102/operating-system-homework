@@ -95,7 +95,7 @@ void Task(char *userinput)
             Init_Process(seg);
             Init_ProcessPCB(pcb_pos, &userinput[5]);
             cur_process = &pcb[pcb_pos].regs;
-            pcb_pos = (pcb_pos + 1) % 4;
+            pcb_pos = (pcb_pos + 1) % Proc_Limit;
         }
         else
         {
@@ -135,17 +135,6 @@ int run_resolve(char *src)
         }
     }
     return -1; //否则返回-1
-}
-void ShowProcess()
-{
-    for (int i = 0; i < 4; i++)
-    {
-        if (pcb[i].occupied)
-        {
-            print(pcb[i].name, Terminalrow, 1, len(pcb[i].name), 15); //循环打印信息
-            Terminalrow++;
-        } //   //打印程序所在扇区
-    }
 }
 void buildtable()
 {
