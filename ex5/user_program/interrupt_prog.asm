@@ -1,8 +1,6 @@
 section .code
 org 100h
 main:
-    mov ax,cs
-    mov ds,ax
     mov ah,0
     int 16h   
     mov bl, 15

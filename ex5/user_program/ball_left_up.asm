@@ -6,9 +6,6 @@ xright equ 80       ;分别设置反弹的四个边界
 row equ 80          ;屏幕大小为80*25,同一列不同行的偏移是80
 section .code
 main:
-    mov ax,cs
-    mov ds,ax
-    mov ss,ax
     mov ax,0xb800           
     mov es,ax               ;es指向显存
     mov di,0                ;初始化di

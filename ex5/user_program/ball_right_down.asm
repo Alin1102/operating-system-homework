@@ -9,8 +9,6 @@ xright equ 158
 row equ 80
 section .code
 main:
-mov ax,cs
-mov ds,ax
 mov ax,0xb800   
 mov es,ax       ;es指向显存
 mov di,0        ;初始化di
