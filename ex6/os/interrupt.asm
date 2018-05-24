@@ -144,6 +144,9 @@ _here:
     mov ds,ax
     push 0
     call _Context_Switch
+    pushf
+    call far [_Interrupt_Addr+4*8]
+    call _Show_Time
     jmp _Int38h_Restart
 
 _Int38h_Restart:
