@@ -1,22 +1,20 @@
 org 100h
 section .code
 main:
-    sti
-    int 34h
-    call delay
-    int 35h
-    call delay
-    int 36h
-    call delay
-    int 37h
-    call delay
-    mov ah,16
-    int 21h
-    jmp $
-
-delay:
-    mov ah,86h                  ;这里跟引导程序一样进行BIOS调用
-    mov cx,0x11
-    mov dx,0x6480     
-    int 15h
-ret
+    mov ax,0xb800
+    mov es,ax
+    mov di,80*2*6+2*20
+    mov byte [es:di],'A'
+    mov byte [es:di+1],15
+shoot:
+    mov al,[dischar]
+    mov byte [es:di],al
+    push ax
+    mov byte al,[es:di+1]
+    dec al
+    mov [es:di+1],al
+    pop ax
+    jmp shoot
+    ret
+datadef:
+    dischar db 'A'
